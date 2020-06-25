@@ -1,0 +1,47 @@
+body{
+    background-color: #98C5CF;
+    color: white;
+    font-weight: bold;
+}
+.senha{
+    display: flex;
+}
+
+#verConf,
+#ver{
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #ced4da;
+    border-left: 0px;
+}
+
+#verConf img,
+#ver img{
+    width: 20px;
+}
+
+#nosee, #nosee2{
+    display: none;
+}
+
+#InputConfirmSenha,
+#InputSenha{
+    border-radius: 5px 0 0 5px;
+}
+
+h1{
+    text-align: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#buttons{
+    text-align: center;
+    margin-top: 2vh;
+    margin-bottom: 12vh;
+}
+
+#cancel,
+#create{
+    margin-left: 0.5vw;
+}
