@@ -31,6 +31,8 @@ id int identity (1,1) primary key,
 fnome varchar(50)not null,
 lnome varchar(50)not null,
 cpf		varchar(11)not null,
+telfixo varchar(14),
+telcelu varchar(15) not null,
 email varchar(100) not null,
 senha varchar(20)not null,
 sexo varchar(20)not null,
@@ -113,10 +115,12 @@ select *from f_LisSimples()
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --inserir uma cliente e endereço juntas 
-Create procedure sp_insercao
+Create  procedure sp_insercao
 @fnome varchar(50),
 @lnome varchar(50),
 @cpf		varchar(11),
+@telfixo varchar(14),
+@telcel varchar(15),
 @email varchar(100),
 @senha varchar(20),
 @sexo varchar(20),
@@ -127,15 +131,17 @@ Create procedure sp_insercao
 as
 begin
 		Insert into endereco Values(@cep,@logradouro,@porta,@complent)
-		Insert into cliente Values(@fnome,@lnome,@cpf,@email,@senha,@sexo,@cep)
+		Insert into cliente Values(@fnome,@lnome,@cpf,@telfixo,@telcel,@email,@senha,@sexo,@cep)
 end
 
-exec sp_insercao 'Rafael','Borges','69420420691','rafael@hotmail.com','Aves','Masculino',111111,'Rua aguia de haia',85,'Viela'
-exec sp_insercao 'Jose','Luiz','99999999','JLuiz@hotmail.com','Rosas','Masculino',888888,'Rua aguia de haia',61,'Bairro'
-exec sp_insercao 'George','Fernando','846454984','Fernandão@hotmail.com','Terra','Masculino',999999,'Rua aguia de haia',39,'Alemeda'
+exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino',111111,'Rua aguia de haia',61,'Viela'
+exec sp_insercao 'Jose','Luiz','99999999',null,'(11)-321456789','JLuiz@hotmail.com','Rosas','Masculino',88888,'Rua aguia de haia',61,'Bairro'
+exec sp_insercao 'George','Fernando','846454984','(11)-777777777','(88)-888888888','Fernandão@hotmail.com','Terra','Masculino',999999,'Rua aguia de haia',39,'Alemeda'
 
 select * from cliente
 select * from endereco
+delete cliente
+delete endereco
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função login
