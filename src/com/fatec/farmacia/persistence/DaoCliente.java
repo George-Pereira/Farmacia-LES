@@ -1,5 +1,6 @@
 package com.fatec.farmacia.persistence;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +31,8 @@ public class DaoCliente implements IntDaoCliente{
 			cli.setId(result.getLong("id"));
 			cli.setPrimeiroNome(result.getString("fnome"));
 			cli.setSobreNome(result.getString("lnome"));
+			cli.setTelfixo(result.getString("telfixo"));
+			cli.setTelcel(result.getString("telcel"));
 			cli.setCpf(result.getString("cpf"));
 			cli.setEmail(result.getString("email"));
 			cli.setSenha(result.getString("senha"));
@@ -43,15 +46,22 @@ public class DaoCliente implements IntDaoCliente{
 	@Override
 	public void cadastraCliente(Cliente cli, Endereco end) throws SQLException 
 	{
-		String sql = "INSERT INTO cliente VALUES(?,?,?,?,?,?)";
-		PreparedStatement state = connect.prepareStatement(sql);
+		String sql = "{call sp_insercao(?,?,?,?,?,?,?,?,?,?,?,?)}";
+		CallableStatement state = connect.prepareCall(sql);
 		state.setString(1, cli.getPrimeiroNome());
 		state.setString(2, cli.getSobreNome());
 		state.setString(3, cli.getCpf());
-		state.setString(4, cli.getEmail());
-		state.setString(5, cli.getSenha());
-		state.setString(6, cli.getSexo());
+		state.setString(4, cli.getTelfixo());
+		state.setString(5, cli.getTelcel());
+		state.setString(6, cli.getEmail());
+		state.setString(7, cli.getSenha());
+		state.setString(8, cli.getSexo());
+		state.setString(9, end.getCep());
+		state.setString(10, end.getLogradouro());
+		state.setInt(11, end.getPorta());
+		state.setString(12, end.getComplemento());
 		state.execute();
+		System.out.println("Inserção realizada");
 		state.close();
 		connect.close();
 	}

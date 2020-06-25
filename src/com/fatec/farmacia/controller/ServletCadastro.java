@@ -32,6 +32,7 @@ public class ServletCadastro extends HttpServlet
 		cli.setPrimeiroNome(req.getParameter("fnome"));
 		cli.setSobreNome(req.getParameter("lnome"));
 		cli.setCpf(req.getParameter("cpf"));
+		cli.setTelcel("");
 		cli.setEmail(req.getParameter("email"));
 		cli.setSenha(req.getParameter("pass"));
 		IntDaoCliente daocli = new DaoCliente();

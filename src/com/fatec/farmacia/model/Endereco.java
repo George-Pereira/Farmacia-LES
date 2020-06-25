@@ -5,6 +5,7 @@ public class Endereco
 	private String logradouro;
 	private String cep;
 	private int porta;
+	private String complemento;
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -22,5 +23,12 @@ public class Endereco
 	}
 	public void setPorta(int porta) {
 		this.porta = porta;
+	}
+	public String getComplemento() {
+		return complemento;
+	}
+	public void setComplemento(String complemento) 
+	{
+		this.complemento = complemento;
 	}
 }

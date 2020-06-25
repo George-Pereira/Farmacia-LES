@@ -5,6 +5,20 @@ public class Cliente
 	private long id;
 	private String primeiroNome;
 	private String sobreNome;
+	private String telfixo;
+	private String telcel;
+	public String getTelfixo() {
+		return telfixo;
+	}
+	public void setTelfixo(String telfixo) {
+		this.telfixo = telfixo;
+	}
+	public String getTelcel() {
+		return telcel;
+	}
+	public void setTelcel(String telcel) {
+		this.telcel = telcel;
+	}
 	private String cpf;
 	private String email;
 	private String senha;

@@ -40,9 +40,13 @@
 				<input type="password" name="confpass">
 			</div>
 			<div align="center">
+				<label>Telefone:</label>
+				<input type="text" name="">
+			</div>
+			<div align="center">
 				<label>Sexo:</label>
 				<select id="sexo" name="sexo">
-					<option>Selecione</option>
+					<option>--Selecione--</option>
 					<option value="masc">Masculino</option>
 					<option value="femn">Feminino</option>
 					<option value="other">Outro</option>
