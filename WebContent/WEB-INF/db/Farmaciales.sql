@@ -2,31 +2,28 @@ Create Database farmaciales
 go
 use farmaciales
 
-
-create table remedio
+CREATE TABLE endereco
 (
-id int identity (1,1) primary key,
-re_nome varchar(100),
-re_idtipo int,
-re_preco decimal(7,2),
-re_resu varchar(200),
-re_quant int,
-foreign key (re_idtipo) references tipo(id)
+cep varchar(11) not null,
+logradouro varchar(50)not null,
+porta int not null,
+complent varchar(50)not null,
+Primary Key (cep)
 )
-insert into remedio values
-(1,'cloroquina',10,'69.99','Cancer',99),
-(2,'Viagra',10,'120.50','permite ereçoes durante horas',99),
-(3,'Bengala',10,'130.00','ajuda a fazer a locomoção',99)
-select * from remedio
 
 create table tipo
 (
 id int identity (1,1) primary key,
 classe varchar(100) ,
 )
-insert into tipo values
-(10,'pilula')
-select * from tipo
+
+create table compra(
+id int identity (1,1),
+c_qntd int ,
+dtcompra datetime,
+val_total decimal(7,2),
+Constraint pk_compra PRIMARY KEY (id,dtcompra)
+)
 
 CREATE TABLE cliente
 (
@@ -40,30 +37,32 @@ sexo varchar(20)not null,
 c_cep varchar(11) not null,
 foreign key (c_cep) references endereco(cep)
 )
-insert into cliente values 
-(1,'MIYAGI','japones','98765432101','banana','coringa','macho',111111)
-select * from cliente
 
-CREATE TABLE endereco
+create table remedio
 (
-cep varchar(11) not null,
-logradouro varchar(50)not null,
-porta int not null,
-complent varchar(50)not null,
-Primary Key (cep)
+id int identity (1,1) primary key,
+re_nome varchar(100),
+re_idtipo int,
+re_preco decimal(7,2),
+re_resu varchar(200),
+re_quant int,
+foreign key (re_idtipo) references tipo(id)
 )
-insert into endereco values 
-(111111,'japão',15,'PÃO')
+
+insert into tipo values
+('Pilula'),
+('Xarope'),
+('Acessorio')
+insert into remedio values
+('Cloroquina',1,'69.99','Previni covid-19',50),
+('Viagra',1,'120.50','Permite ereçoes durante horas',20),
+('Bengala',3,'130.00','ajuda a fazer a locomoção',30),
+('Biotonico Fontora',2,'40.00','Ajuda a Criança a se alimente',50)
+
+select * from remedio
+select * from tipo
+select * from cliente
 select * from endereco
-
-
-create table compra(
-id int identity (1,1),
-c_qntd int ,
-dtcompra datetime,
-val_total decimal(7,2),
-Constraint pk_compra PRIMARY KEY (id,dtcompra)
-)
 
 --função para um relatorio(nome do produto,quantidade e vendas)
 
@@ -86,9 +85,9 @@ begin
 return
 end
 
-select * from f_listagem('cloro')
-select * from f_listagem('cloroquina')
-
+select * from f_listagem('Cloro')
+select * from f_listagem('Cloroquina')
+select * from f_listagem('Biotonico Fontora')
 select * from f_listagem('Viagra')
 select * from f_listagem('Bengala')
 
@@ -114,7 +113,7 @@ select *from f_LisSimples()
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --inserir uma cliente e endereço juntas 
-Create procedure sp_inserção
+Create procedure sp_insercao
 @fnome varchar(50),
 @lnome varchar(50),
 @cpf		varchar(11),
@@ -131,12 +130,12 @@ begin
 		Insert into cliente Values(@fnome,@lnome,@cpf,@email,@senha,@sexo,@cep)
 end
 
-exec sp_inserção 'Miyagi','Japones','69420420691','Teste','teste','Feminino',111111,'japão',15,'PÃO'
-exec sp_inserção 'Jose','Luiz','99999999','Pão','Pão','Masculino',888888,'Terra',55,'YUn'
-exec sp_inserção 'George','Fernando','846454984','Terra','Terra','Masculino',999999,'Marte',99,'Young'
+exec sp_insercao 'Rafael','Borges','69420420691','rafael@hotmail.com','Aves','Masculino',111111,'Rua aguia de haia',85,'Viela'
+exec sp_insercao 'Jose','Luiz','99999999','JLuiz@hotmail.com','Rosas','Masculino',888888,'Rua aguia de haia',61,'Bairro'
+exec sp_insercao 'George','Fernando','846454984','Fernandão@hotmail.com','Terra','Masculino',999999,'Rua aguia de haia',39,'Alemeda'
 
 select * from cliente
-select * from enderco
+select * from endereco
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função login
@@ -172,5 +171,5 @@ DECLARE	@validaEmail varchar(100),
 		return
 end
  
-select * from f_validaLogin('banana','coringa')
+select * from f_validaLogin('rafael@hotmail.com','Aves')
 select * from f_validaLogin('afsdfasfasf','coringa')
