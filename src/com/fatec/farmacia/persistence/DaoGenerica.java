@@ -12,7 +12,7 @@ public class DaoGenerica implements IntDaoGenerica{
 		try 
 		{
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			connect = DriverManager.getConnection("jdbc:jtds:sqlserver://127.0.0.1:1433;DatabaseName=farmaciales;namedPipes=True");
+			connect = DriverManager.getConnection("jdbc:jtds:sqlserver://127.0.0.1:1433;DatabaseName=farmaciales;namedPipes=True", "prof", "321");
 		}
 		catch (ClassNotFoundException | SQLException e) 
 		{
@@ -20,5 +20,4 @@ public class DaoGenerica implements IntDaoGenerica{
 		}
 		return connect;
 	}
-
 }
