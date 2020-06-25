@@ -1,0 +1,66 @@
+body{
+    background-color: #98C5CF;
+}
+
+.entre{
+    text-align: center;
+}
+
+.entre button{
+    margin-top: 2vh;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.entre a{
+    color: white;
+}
+
+.entre a p{
+    margin-top: 2vh;
+}
+
+#volta img{
+    width: 50px;
+    margin-top: 5vh;
+}
+
+#volta img:hover{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.senha{
+    display: flex;
+}
+
+#ver{
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #ced4da;
+    border-left: 0px;
+}
+
+#ver img{
+    width: 20px;
+}
+
+#nosee{
+    display: none;
+}
+
+#InputSenha{
+    border-radius: 5px 0 0 5px;
+}
+
+form{
+    margin-top: 20vh;
+    padding: 0 10vw;
+}
+
+form label{
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+}
