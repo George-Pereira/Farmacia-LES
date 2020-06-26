@@ -1,5 +1,5 @@
 package com.fatec.farmacia.persistence;
 
-public interface IntDaoRemedio {
+public interface IntDaoProduto {
 
 }

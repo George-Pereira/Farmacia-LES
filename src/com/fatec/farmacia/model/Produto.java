@@ -1,6 +1,6 @@
 package com.fatec.farmacia.model;
 
-public class Remedio 
+public class Produto 
 {
 	private long idRemedio;
 	private String nomeRemedio;
