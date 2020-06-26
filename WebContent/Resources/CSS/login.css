@@ -20,17 +20,6 @@ body{
     margin-top: 2vh;
 }
 
-#volta img{
-    width: 50px;
-    margin-top: 5vh;
-}
-
-#volta img:hover{
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
 .senha{
     display: flex;
 }

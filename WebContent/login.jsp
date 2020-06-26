@@ -13,9 +13,6 @@
 <body>
 
     <div class="container">
-        <a href="" id="volta">
-            <img alt="image" src="./img/keyboard_backspace-24px.svg">
-        </a>
         <form action="./logon" method="post" id="form">
             <div class="form-group">
                 <label for="InputEmail">Email</label>
