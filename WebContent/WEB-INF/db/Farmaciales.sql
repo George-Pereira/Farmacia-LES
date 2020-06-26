@@ -2,6 +2,7 @@ Create Database farmaciales
 go
 use farmaciales
 
+
 CREATE TABLE endereco
 (
 cep varchar(11) not null,
@@ -75,6 +76,13 @@ select * from remedio
 select * from tipo
 select * from cliente
 select * from endereco
+select * from compra
+
+delete  remedio
+delete tipo
+delete  cliente
+delete endereco
+delete compra
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Listagem especifica*/
@@ -127,7 +135,7 @@ select *from f_LisSimples()
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --procedure Venda
-Create drop Procedure sp_venda
+Create Procedure sp_venda
 @codcli int,
 @codrem int,
 @NomeRemedio varchar(100),
@@ -137,26 +145,42 @@ Create drop Procedure sp_venda
 @valor_Remedio decimal(7,2)
 as
 begin 
-		declare @valor_compra decimal(7,2)
+		declare @valor_compra decimal(7,2),
+					@quantidade_remedio int,
+					 @quantidade_removido int
 		set @valor_compra =SUM(@Quant_compra*@valor_Remedio)
 		INSERT INTO compra values (@codcli,@codrem,@Quant_compra,@d_compra,@valor_compra)
+		set @quantidade_remedio =(select re_quant from remedio where id = @codrem)
+		set @quantidade_removido =SUM(@quantidade_remedio-@Quant_compra)
+		 update remedio set re_quant = @quantidade_removido where id = @codrem
 end
 
 exec sp_venda 1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
+exec sp_venda 1,2,'Viagra','pilula','22/05/2020',2,'120.50'
+exec sp_venda 2,2,'Viagra','pilula','22/05/2020',2,'120.50'
 select * from compra
+select * from remedio
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função para um relatorio(nome do produto,quantidade e vendas)
 
 CREATE  function f_relatorio()
-RETURNS @Tabela(
-cod_rem 
-nome_rem
-qntdVend
-valor_rem
-valor_vend
+RETURNS @tabela table(
+cod_rem int,
+nome_rem varchar(100),
+qntdVend int,
+valor_rem decimal(7,2),
+valor_vend decimal(7,2),
+dtcompra date
 ) 
+as 
+begin
+		Insert  @tabela(cod_rem,nome_rem,qntdVend,valor_rem,valor_vend,dtcompra)
+		select r.id,r.re_nome,c.c_qntd,r.re_preco,c.val_total,c.dtcompra  from remedio r INNER JOIN compra c on r.id = c.rem_id
+		return
+end
 
+select * from f_relatorio()
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --inserir uma cliente e endereço juntas 
 Create  procedure sp_insercao
