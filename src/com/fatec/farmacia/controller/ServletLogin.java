@@ -41,8 +41,6 @@ public class ServletLogin extends HttpServlet
 			}
 			else 
 			{
-				HttpSession session = req.getSession();
-				session.setAttribute("falha", "Ops! Esse Login não é valido em nosso sistema... Tente novamente");
 				resp.sendRedirect("./login.jsp");
 			}
 		}

@@ -1,8 +1,7 @@
 package com.fatec.farmacia.controller;
-
-import java.io.IOException;
 import java.sql.SQLException;
-
+import java.util.Date;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,16 +28,26 @@ public class ServletCadastro extends HttpServlet
 	{
 		Cliente cli = new Cliente();
 		Endereco end = new Endereco();
-		cli.setPrimeiroNome(req.getParameter("fnome"));
-		cli.setSobreNome(req.getParameter("lnome"));
-		cli.setCpf(req.getParameter("cpf"));
-		cli.setTelcel("");
-		cli.setEmail(req.getParameter("email"));
-		cli.setSenha(req.getParameter("pass"));
+		cli.setPrimeiroNome(req.getParameter("Input_Nome"));
+		cli.setSobreNome(req.getParameter("Input_Sobrenome"));
+		cli.setCpf(req.getParameter("Input_CPF"));
+		@SuppressWarnings("deprecation")
+		long data = java.util.Date.parse(req.getParameter("Input_Data"));
+		Date nasc = new Date();
+		nasc.setTime(data);
+		cli.setNascimento(nasc);
+		cli.setTelfixo(req.getParameter("Input_TelRes"));
+		cli.setTelcel(req.getParameter("Input_Cel"));
+		cli.setEmail(req.getParameter("Input_Email"));
+		cli.setSenha(req.getParameter("InputSenha"));
+		cli.setSexo(req.getParameter("Input_Sexo"));
 		IntDaoCliente daocli = new DaoCliente();
-		end.setCep(req.getParameter("cep"));
-		end.setLogradouro(req.getParameter("lograd"));
-		end.setPorta(Integer.parseInt(req.getParameter("num")));
+		end.setCep(req.getParameter("Input_CEP"));
+		end.setLogradouro(req.getParameter("Input_Rua"));
+		end.setPorta(Integer.parseInt(req.getParameter("Input_Numero")));
+		end.setCidade(req.getParameter("Input_Cidade"));
+		end.setBairro(req.getParameter("Input_Bairro"));
+		end.setUf(req.getParameter("Input_Estado"));
 		try {
 			daocli.cadastraCliente(cli,end);
 			resp.sendRedirect("./login.jsp");
