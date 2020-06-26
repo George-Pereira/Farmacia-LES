@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -40,7 +40,7 @@
                     <input type="text" class="form-control" id="input_CPF" name="Input_CPF"
                         placeholder="Ex.: 000.000.000-00">
                     <div class="invalid-feedback">
-                        Digite um CPF V·lido.
+                        Digite um CPF V√°lido.
                     </div>
                 </div>
                 <div class="form-group col-md-3">
@@ -48,7 +48,7 @@
                     <input type="text" name="Input_Data" class="form-control" id="input_Date"
                         placeholder="Ex.: 01/01/2000">
                     <div class="invalid-feedback">
-                        Data inv·lida ou menor de 16 anos.
+                        Data inv√°lida ou menor de 16 anos.
                     </div>
                 </div>
                 <div class="form-group col-md-3">
@@ -70,23 +70,23 @@
                     <input type="text" class="form-control" id="input_CEP" name="Input_CEP"
                         placeholder="Ex.: 00000-000">
                     <div class="invalid-feedback">
-                        Digite um CEP v·lido.
+                        Digite um CEP v√°lido.
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="input_Bairro">Bairro</label>
                     <input type="text" class="form-control" id="input_Bairro" name="Input_Bairro"
-                        placeholder="Preenchimento autom·tico">
+                        placeholder="Preenchimento autom√°tico">
                     <div class="invalid-feedback">
-                        Digite um CEP v·lido.
+                        Digite um CEP v√°lido.
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="input_Cidade">Cidade</label>
                     <input type="text" class="form-control" id="input_Cidade" name="Input_Cidade"
-                        placeholder="Preenchimento autom·tico">
+                        placeholder="Preenchimento autom√°tico">
                     <div class="invalid-feedback">
-                        Digite um CEP v·lido.
+                        Digite um CEP v√°lido.
                     </div>
                 </div>
             </div>
@@ -95,22 +95,22 @@
                     <label for="input_Estado">UF</label>
                     <input id="input_Estado" class="form-control" name="Input_Estado" placeholder="--">
                     <div class="invalid-feedback">
-                        Digite um CEP v·lido.
+                        Digite um CEP v√°lido.
                     </div>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="input_Rua">Rua</label>
                     <input type="text" class="form-control" id="input_Rua" name="Input_Rua"
-                        placeholder="Preenchimento autom·tico">
+                        placeholder="Preenchimento autom√°tico">
                     <div class="invalid-feedback">
-                        Digite um CEP v·lido.
+                        Digite um CEP v√°lido.
                     </div>
                 </div>
                 <div class="form-group col-md-1">
                     <label for="input_Numero">Numero</label>
                     <input type="text" class="form-control" id="input_Numero" name="Input_Numero">
                     <div class="invalid-feedback">
-                        Digite o Numero de sua residÍncia.
+                        Digite o Numero de sua resid√™ncia.
                     </div>
                 </div>
                 <div class="form-group col-md-5">
@@ -129,7 +129,7 @@
                     <input type="text" class="form-control" id="input_Cel" name="Input_Cel"
                         placeholder="Ex.: (11) 12345-6789">
                     <div class="invalid-feedback">
-                        Digite um Celular v·lido.
+                        Digite um Celular v√°lido.
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                     <input type="email" class="form-control" id="input_Email" name="Input_Email"
                         placeholder="Ex.: user@corongafarma.com.br">
                     <div class="invalid-feedback">
-                        Digite um email v·lido.
+                        Digite um email v√°lido.
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -147,7 +147,7 @@
                     <input type="email" class="form-control" id="input_ConfEmail" name="Input_ConfirmEmail"
                         placeholder="Confirme seu email">
                     <div class="invalid-feedback">
-                        Seu Email n„o est· de acordo.
+                        Seu Email n√£o est√° de acordo.
                     </div>
                 </div>
             </div>
@@ -158,11 +158,11 @@
                         <input type="password" class="form-control" name="InputSenha" id="InputSenha">
                         <button class="btn" id="ver" type="button">
                             <img src="./img/see.svg" id="see" alt="Ver Senha">
-                            <img src="./img/noSee.svg" id="nosee" alt="N„o Ver Senha">
+                            <img src="./img/noSee.svg" id="nosee" alt="N√£o Ver Senha">
                         </button>
                     </div>
                     <div id="invalid" class="invalid-feedback">
-                        Digite uma senha v·lida.
+                        Digite uma senha v√°lida.
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -171,11 +171,11 @@
                         <input type="password" class="form-control" name="InputConfirmSenha" id="InputConfirmSenha">
                         <button class="btn" id="verConf" type="button">
                             <img src="./img/see.svg" id="see2" alt="Ver Senha">
-                            <img src="./img/noSee.svg" id="nosee2" alt="N„o Ver Senha">
+                            <img src="./img/noSee.svg" id="nosee2" alt="N√£o Ver Senha">
                         </button>
                     </div>
                     <div id="inval" class="invalid-feedback">
-                        Sua senha n„o est· de acordo.
+                        Sua senha n√£o est√° de acordo.
                     </div>
                 </div>
             </div>
@@ -247,7 +247,7 @@
                             }
                             else {
                                 limpa_formulario_cep();
-                                alert("CEP n„o encontrado.");
+                                alert("CEP n√£o encontrado.");
                             }
                         });
                     }

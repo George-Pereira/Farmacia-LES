@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -20,7 +20,7 @@
                 <img src="img/Logo.png" alt="Logo Coronga Farma">
             </a>
             <form class="form-inline my-2 my-lg-0" id="search">
-                <input class="form-control mr-sm-2" type="search" placeholder="O que está procurando..."
+                <input class="form-control mr-sm-2" type="search" placeholder="O que estÃ¡ procurando..."
                     aria-label="Search">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">
                     <img src="img/search.svg" alt="Pesquisar">
@@ -60,8 +60,8 @@
                         <select id="input_categoria" name="Input_Categoria" class="form-control">
                             <option selected>--</option>
                             <option>Absorvente</option>
-                            <option>Colírio</option>
-                            <option>Comprimido Genérico</option>
+                            <option>ColÃ­rio</option>
+                            <option>Comprimido GenÃ©rico</option>
                             <option>Comprimido Tarja Amarela</option>
                             <option>Comprimido Tarja Preta</option>
                             <option>Creme Dental</option>
@@ -81,9 +81,9 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="input_descricao">descrição</label>
+                        <label for="input_descricao">descriÃ§Ã£o</label>
                         <textarea class="form-control" name="Input_Descricao" id="input_descricao" cols="30"
-                            rows="10" placeholder="Insira uma descrição do produto..."></textarea>
+                            rows="10" placeholder="Insira uma descriÃ§Ã£o do produto..."></textarea>
                         <div class="invalid-feedback">
                             Digite seu nome corretamente.
                         </div>
@@ -106,10 +106,10 @@
     </main>
     <footer>
         <div class="d-flex justify-content-between" id="foot">
-            <div class="text" style="color: white; text-align: center;">Copyright © Coronga Farma</div>
+            <div class="text" style="color: white; text-align: center;">Copyright Â© Coronga Farma</div>
             <div>
                 <a href="" style="color: white;">Privacy Policy</a>
-                ·
+                Â·
                 <a href="" style="color: white;">Terms &amp; Conditions</a>
             </div>
         </div>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -68,7 +67,7 @@
                         <td>Curativos Transparentes Band-Aid</td>
                         <td>250</td>
                         <td>6,79</td>
-                        <td>1.697,5‬0</td>
+                        <td>1.697,50</td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>

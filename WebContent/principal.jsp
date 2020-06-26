@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -22,7 +22,7 @@
                 <img src="img/Logo.png" alt="Logo Coronga Farma">
             </a>
             <form class="form-inline my-2 my-lg-0" id="search">
-                <input class="form-control mr-sm-2" type="search" placeholder="O que está procurando..."
+                <input class="form-control mr-sm-2" type="search" placeholder="O que estÃ¡ procurando..."
                     aria-label="Search">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">
                     <img src="img/search.svg" alt="Pesquisar">
@@ -68,7 +68,7 @@
                     <div class="card">
                         <img src="img/CremeFacial.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Creme Facial AVÈNE</h5>
+                            <h5 class="card-title">Creme Facial AVÃˆNE</h5>
                             <p class="card-text">R$ 55,50</p>
                             <button class="btn btn-primary">Detalhes</button>
                         </div>
@@ -108,7 +108,7 @@
                     <div class="card">
                         <img src="img/Xarope.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Xarope Expectorante Melagrião</h5>
+                            <h5 class="card-title">Xarope Expectorante MelagriÃ£o</h5>
                             <p class="card-text">R$ 21,59</p>
                             <button class="btn btn-primary">Detalhes</button>
                         </div>
@@ -128,7 +128,7 @@
                     <div class="card">
                         <img src="img/Colirio.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Colírio Moura Brasil</h5>
+                            <h5 class="card-title">ColÃ­rio Moura Brasil</h5>
                             <p class="card-text">R$ 14,99</p>
                             <button class="btn btn-primary">Detalhes</button>
                         </div>
@@ -196,10 +196,10 @@
     </div>
     <footer>
         <div class="d-flex justify-content-between" id="foot">
-            <div class="text" style="color: white; text-align: center;">Copyright © Coronga Farma</div>
+            <div class="text" style="color: white; text-align: center;">Copyright Â© Coronga Farma</div>
             <div>
                 <a href="" style="color: white;">Privacy Policy</a>
-                ·
+                Â·
                 <a href="" style="color: white;">Terms &amp; Conditions</a>
             </div>
         </div>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,7 +29,7 @@
                     <input type="password" class="form-control" name="InputSenha" id="InputSenha">
                     <button class="btn" id="ver" type="button">
                         <img src="./img/see.svg" id="see" alt="Ver Senha">
-                        <img src="./img/noSee.svg" id="nosee" alt="Não Ver Senha">
+                        <img src="./img/noSee.svg" id="nosee" alt="NÃ£o Ver Senha">
                     </button>
                 </div>
                 <div id="invalid" class="invalid-feedback">
@@ -37,7 +39,7 @@
             <div class="entre">
                 <button type="submit" class="btn btn-primary">Entrar</button>
                 <a href="./cadastro.jsp">
-                    <p> Não tem conta? Cadastre-se</p>
+                    <p> NÃ£o tem conta? Cadastre-se</p>
                 </a>
             </div>
         </form>
