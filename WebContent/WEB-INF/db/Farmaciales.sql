@@ -51,7 +51,7 @@ foreign key (re_idtipo) references tipo(id)
 )
 
 create table compra(
-id int identity (1,1),
+id int ,
 cli_id int,
 rem_id int,
 c_qntd int ,
