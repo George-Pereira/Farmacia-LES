@@ -6,6 +6,9 @@ public class Endereco
 	private String cep;
 	private int porta;
 	private String complemento;
+	private String cidade;
+	private String uf;
+	private String bairro;
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -30,5 +33,23 @@ public class Endereco
 	public void setComplemento(String complemento) 
 	{
 		this.complemento = complemento;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 }

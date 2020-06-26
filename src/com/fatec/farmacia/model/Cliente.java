@@ -1,10 +1,13 @@
 package com.fatec.farmacia.model;
 
+import java.util.Date;
+
 public class Cliente
 {
 	private long id;
 	private String primeiroNome;
 	private String sobreNome;
+	private Date nascimento;
 	private String telfixo;
 	private String telcel;
 	public String getTelfixo() {
@@ -64,5 +67,11 @@ public class Cliente
 	}
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+	public Date getNascimento() {
+		return nascimento;
+	}
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
 	}
 }
