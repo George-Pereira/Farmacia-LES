@@ -144,39 +144,7 @@ end
 
 exec sp_venda 1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
 select * from compra
-/*
-CREATE  function f_venda(@codcli int,@codrem int)
-RETURNS @Tabela table(
-idRemedio int,
-NomeRemedio varchar(100),
-TipoRemedio varchar(100),
-valor_Remedio decimal(7,2),
-Quant_compra varchar(100),
-valor_compra decimal(7,2)
-)
-as 
-Begin 
-		Declare @quantidadeRemedio int,
-					 @nomeremedio varchar(100),
-					 @TipoRemedio varchar(100),
-					 @valor_Remedio decimal(7,2),
-					 @data datetime,
-					 @Quant_compra int,
-					 @valor_compra decimal(7,2)
-					 set @quantidadeRemedio =(Select re_quant from remedio where @codrem = id)
-					 if (@quantidadeRemedio <= 0)
-						begin
-							return
-						end
-					else
-						begin
-								set @valor_compra = sum(@Quant_compra*@valor_Remedio)
-								set @data = getdate()
-								insert 
-						end
-		return
-End
-*/
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função para um relatorio(nome do produto,quantidade e vendas)
 
