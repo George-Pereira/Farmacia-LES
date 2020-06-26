@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="nav_principal">
         <!--Desktop-->
-        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
             <a class="navbar-brand" href="" id="navImg">
                 <img src="img/Logo.png" alt="Logo Coronga Farma">
             </a>

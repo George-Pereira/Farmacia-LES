@@ -1,0 +1,59 @@
+#nav_principal{
+    background-color: #98C5CF;
+}
+
+#navImg img{
+    width: 25%;
+}
+
+#search{
+    position: absolute;
+    right: 35vw;
+}
+
+#search input{
+    width: 20vw;
+}
+
+#search button img{
+    width: 22px;
+}
+
+main{
+    margin-top: 15vh;
+    font-weight: bold;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 5vh;
+    color: #98C5CF;
+}
+
+.button{
+    text-align: center;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+}
+
+footer{
+    background-color: #98C5CF;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+#foot{
+    padding: 1% 5vw;
+}

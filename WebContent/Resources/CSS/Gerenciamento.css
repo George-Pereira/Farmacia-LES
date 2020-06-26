@@ -1,0 +1,45 @@
+#nav_principal{
+    background-color: #98C5CF;
+}
+
+#navImg img{
+    width: 25%;
+}
+
+#search{
+    position: absolute;
+    right: 35vw;
+}
+
+#search input{
+    width: 20vw;
+}
+
+#search button img{
+    width: 22px;
+}
+
+main{
+    margin-top: 15vh;
+    font-weight: bold;
+}
+
+#tabela{
+    padding: 0 10vw;
+}
+
+thead{
+    color: white;
+    font-size: 24px;
+    position: sticky;
+    top: 0;
+}
+
+.button{
+    text-align: center;
+    margin-top: 5vh;
+}
+
+#Voltar{
+    margin-bottom: 10vh;
+}
