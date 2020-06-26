@@ -216,15 +216,18 @@ select * from endereco
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função login
-Create  function f_validaLogin(@email varchar(100),@senha varchar(20))
+Create function f_validaLogin(@email varchar(100),@senha varchar(20))
 RETURNS @tabela table(
 id int ,
 fnome varchar(50),
 lnome varchar(50),
 cpf		varchar(11),
-email varchar(100),
+telfixo varchar(14),
+telcelu varchar(15) ,
+email varchar(100) ,
 senha varchar(20),
-sexo varchar(20)
+sexo varchar(20),
+dnasci date 
 )
 as
 BEGIN
@@ -238,7 +241,8 @@ DECLARE	@validaEmail varchar(100),
 		if(@senha = @validaSenha)
 			Begin
 				Set @Resultado = 'Concetado!'
-				 insert @tabela(id,fnome,lnome,cpf,email,senha,sexo) select id,fnome,lnome,cpf,email,senha,sexo from cliente where email =@email
+				 insert @tabela(id,fnome,lnome,cpf,telfixo,telcelu,email,senha,sexo,dnasci) 
+				 select id,fnome,lnome,cpf,telfixo,telcelu,email,senha,sexo,dnasci from cliente where email =@email
 			End
 	  End
 	else
