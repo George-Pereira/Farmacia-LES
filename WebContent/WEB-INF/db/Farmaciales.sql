@@ -8,6 +8,9 @@ cep varchar(11) not null,
 logradouro varchar(50)not null,
 porta int not null,
 complent varchar(50)not null,
+uf char(2)not null,
+cidade varchar(100)not null,
+bairro varchar(100)not null,
 Primary Key (cep)
 )
 
@@ -17,13 +20,7 @@ id int identity (1,1) primary key,
 classe varchar(100) ,
 )
 
-create table compra(
-id int identity (1,1),
-c_qntd int ,
-dtcompra datetime,
-val_total decimal(7,2),
-Constraint pk_compra PRIMARY KEY (id,dtcompra)
-)
+
 
 CREATE TABLE cliente
 (
@@ -36,6 +33,7 @@ telcelu varchar(15) not null,
 email varchar(100) not null,
 senha varchar(20)not null,
 sexo varchar(20)not null,
+dnasci date not null,
 c_cep varchar(11) not null,
 foreign key (c_cep) references endereco(cep)
 )
@@ -49,6 +47,18 @@ re_preco decimal(7,2),
 re_resu varchar(200),
 re_quant int,
 foreign key (re_idtipo) references tipo(id)
+)
+
+create table compra(
+id int identity (1,1),
+cli_id int,
+rem_id int,
+c_qntd int ,
+dtcompra date,
+val_total decimal(7,2),
+Constraint pk_compra PRIMARY KEY (id,dtcompra),
+foreign key (cli_id) references cliente(id),
+foreign key (rem_id) references remedio(id)
 )
 
 insert into tipo values
@@ -65,8 +75,6 @@ select * from remedio
 select * from tipo
 select * from cliente
 select * from endereco
-
---função para um relatorio(nome do produto,quantidade e vendas)
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Listagem especifica*/
@@ -89,9 +97,13 @@ end
 
 select * from f_listagem('Cloro')
 select * from f_listagem('Cloroquina')
+select * from f_listagem('Bio')
 select * from f_listagem('Biotonico Fontora')
 select * from f_listagem('Viagra')
 select * from f_listagem('Bengala')
+
+
+
 
 
 /*LISTAGEM GENERICA*/
@@ -114,6 +126,70 @@ end
 select *from f_LisSimples()
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+--procedure Venda
+Create drop Procedure sp_venda
+@codcli int,
+@codrem int,
+@NomeRemedio varchar(100),
+@TipoRemedio varchar(100),
+@d_compra date,
+@Quant_compra INT,
+@valor_Remedio decimal(7,2)
+as
+begin 
+		declare @valor_compra decimal(7,2)
+		set @valor_compra =SUM(@Quant_compra*@valor_Remedio)
+		INSERT INTO compra values (@codcli,@codrem,@Quant_compra,@d_compra,@valor_compra)
+end
+
+exec sp_venda 1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
+select * from compra
+/*
+CREATE  function f_venda(@codcli int,@codrem int)
+RETURNS @Tabela table(
+idRemedio int,
+NomeRemedio varchar(100),
+TipoRemedio varchar(100),
+valor_Remedio decimal(7,2),
+Quant_compra varchar(100),
+valor_compra decimal(7,2)
+)
+as 
+Begin 
+		Declare @quantidadeRemedio int,
+					 @nomeremedio varchar(100),
+					 @TipoRemedio varchar(100),
+					 @valor_Remedio decimal(7,2),
+					 @data datetime,
+					 @Quant_compra int,
+					 @valor_compra decimal(7,2)
+					 set @quantidadeRemedio =(Select re_quant from remedio where @codrem = id)
+					 if (@quantidadeRemedio <= 0)
+						begin
+							return
+						end
+					else
+						begin
+								set @valor_compra = sum(@Quant_compra*@valor_Remedio)
+								set @data = getdate()
+								insert 
+						end
+		return
+End
+*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+--função para um relatorio(nome do produto,quantidade e vendas)
+
+CREATE  function f_relatorio()
+RETURNS @Tabela(
+cod_rem 
+nome_rem
+qntdVend
+valor_rem
+valor_vend
+) 
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --inserir uma cliente e endereço juntas 
 Create  procedure sp_insercao
 @fnome varchar(50),
@@ -124,24 +200,26 @@ Create  procedure sp_insercao
 @email varchar(100),
 @senha varchar(20),
 @sexo varchar(20),
+@datnto date,
 @cep varchar(11) ,
 @logradouro varchar(50),
 @porta int ,
-@complent varchar(50)
+@complent varchar(50),
+@uf char(2),
+@cidade varchar(100),
+@bairro varchar(100)
 as
 begin
-		Insert into endereco Values(@cep,@logradouro,@porta,@complent)
-		Insert into cliente Values(@fnome,@lnome,@cpf,@telfixo,@telcel,@email,@senha,@sexo,@cep)
+		Insert into endereco Values(@cep,@logradouro,@porta,@complent,@uf,@cidade,@bairro)
+		Insert into cliente Values(@fnome,@lnome,@cpf,@telfixo,@telcel,@email,@senha,@sexo,@datnto,@cep)
 end
 
-exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino',111111,'Rua aguia de haia',61,'Viela'
-exec sp_insercao 'Jose','Luiz','99999999',null,'(11)-321456789','JLuiz@hotmail.com','Rosas','Masculino',88888,'Rua aguia de haia',61,'Bairro'
-exec sp_insercao 'George','Fernando','846454984','(11)-777777777','(88)-888888888','Fernandão@hotmail.com','Terra','Masculino',999999,'Rua aguia de haia',39,'Alemeda'
+exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino','17/06/2015',111111,'Rua aguia de haia',61,'Viela','BH','Bahia','Pelorinho'
+exec sp_insercao 'Jose','Luiz','99999999',null,'(11)-321456789','JLuiz@hotmail.com','Rosas','Masculino','17/11/2015',88888,'Rua aguia de haia',61,'Bairro','RJ','Rio de Janeiro','Mesquita'
+exec sp_insercao 'George','Fernando','846454984','(11)-777777777','(88)-888888888','Fernandão@hotmail.com','Terra','Masculino','20/01/2015',999999,'Rua aguia de haia',39,'Alemeda','SP','São Paulo','Augusta'
 
 select * from cliente
 select * from endereco
-delete cliente
-delete endereco
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função login
