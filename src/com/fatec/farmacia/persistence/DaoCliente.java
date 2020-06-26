@@ -33,7 +33,7 @@ public class DaoCliente implements IntDaoCliente{
 			cli.setPrimeiroNome(result.getString("fnome"));
 			cli.setSobreNome(result.getString("lnome"));
 			cli.setTelfixo(result.getString("telfixo"));
-			cli.setTelcel(result.getString("telcel"));
+			cli.setTelcel(result.getString("telcelu"));
 			cli.setCpf(result.getString("cpf"));
 			cli.setEmail(result.getString("email"));
 			cli.setSenha(result.getString("senha"));

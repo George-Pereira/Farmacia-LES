@@ -117,17 +117,19 @@ select * from f_listagem('Bengala')
 /*LISTAGEM GENERICA*/
 Create function f_LisSimples()
 RETURNS @tabela table(
+id	 int,
 Nome varchar(100),
 Quantidade int,
 Preco decimal(7,2),
-Tipo varchar(20)
+Tipo varchar(20),
+Detalhe varchar(200)
 )
 as
 begin 
 	Declare @nome varchar(100),
 				 @qntd int
-	Insert @tabela(Nome,Quantidade,Preco,Tipo) 
-	select r.re_nome,r.re_quant,re_preco,t.classe from remedio r INNER JOIN tipo t on r.re_idtipo=t.id
+	Insert @tabela(id,Nome,Quantidade,Preco,Tipo, Detalhe) 
+	select r.id,r.re_nome,r.re_quant,re_preco,t.classe, re_resu from remedio r INNER JOIN tipo t on r.re_idtipo=t.id
 return
 end
 
@@ -216,6 +218,7 @@ select * from endereco
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função login
+
 Create function f_validaLogin(@email varchar(100),@senha varchar(20))
 RETURNS @tabela table(
 id int ,

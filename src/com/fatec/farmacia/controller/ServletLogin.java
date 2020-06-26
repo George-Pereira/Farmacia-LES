@@ -29,8 +29,8 @@ public class ServletLogin extends HttpServlet
 	private void logar(HttpServletRequest req, HttpServletResponse resp) 
 	{
 		Cliente cli;
-		String user = req.getParameter("usuario");
-		String pass = req.getParameter("senha");
+		String user = req.getParameter("InputEmail");
+		String pass = req.getParameter("InputSenha");
 		IntDaoCliente dao = new DaoCliente();
 		try 
 		{
