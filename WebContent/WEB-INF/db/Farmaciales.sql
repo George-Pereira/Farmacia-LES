@@ -136,6 +136,7 @@ select *from f_LisSimples()
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --procedure Venda
 Create Procedure sp_venda
+@codvenda int,
 @codcli int,
 @codrem int,
 @NomeRemedio varchar(100),
@@ -149,15 +150,15 @@ begin
 					@quantidade_remedio int,
 					 @quantidade_removido int
 		set @valor_compra =SUM(@Quant_compra*@valor_Remedio)
-		INSERT INTO compra values (@codcli,@codrem,@Quant_compra,@d_compra,@valor_compra)
+		INSERT INTO compra values (@codvenda,@codcli,@codrem,@Quant_compra,@d_compra,@valor_compra)
 		set @quantidade_remedio =(select re_quant from remedio where id = @codrem)
 		set @quantidade_removido =SUM(@quantidade_remedio-@Quant_compra)
 		 update remedio set re_quant = @quantidade_removido where id = @codrem
 end
 
-exec sp_venda 1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
-exec sp_venda 1,2,'Viagra','pilula','22/05/2020',2,'120.50'
-exec sp_venda 2,2,'Viagra','pilula','22/05/2020',2,'120.50'
+exec sp_venda 1,1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
+exec sp_venda 1,1,2,'Viagra','pilula','22/05/2020',2,'120.50'
+exec sp_venda 2,2,2,'Viagra','pilula','22/05/2020',2,'120.50'
 select * from compra
 select * from remedio
 
