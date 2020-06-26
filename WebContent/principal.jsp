@@ -77,7 +77,7 @@
                     <div class="card">
                         <img src="img/<%=p.getTipoRemedio()%>.png" class="card-img-top" alt="Repelente">
                         <div class="card-body">
-                            <h5 class="card-title"><%=p.getNomeRemedio()%>></h5>
+                            <h5 class="card-title"><%=p.getNomeRemedio()%></h5>
                             <p class="card-text"><%=p.getValUnit()%></p>
                             <button class="btn btn-primary">Detalhes</button>
                         </div>
