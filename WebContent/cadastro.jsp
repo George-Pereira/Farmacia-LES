@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <h1 id="title">Cadastrar Conta</h1>
-        <form id="formCad" action="" method="post">
+        <form id="formCad" action="./cadastrar" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="input_Nome">Nome</label>

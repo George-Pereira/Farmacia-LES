@@ -1,5 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.fatec.farmacia.persistence.IntDaoProduto"%>
+<%@page import="com.fatec.farmacia.persistence.DaoProduto"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.fatec.farmacia.model.Cliente"%>
+<%@ page import="com.fatec.farmacia.model.Produto"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.LinkedList" %>
+
+    <%  Cliente cli = new Cliente();
+    	cli = (Cliente)session.getAttribute("CLIENTE");
+    	if(cli == null)
+    	{
+    		response.sendRedirect("./login");
+    	}
+    	IntDaoProduto dao = new DaoProduto();
+    	List<Produto> prods = new LinkedList<Produto>(); 
+    	prods = dao.getTodosProd();
+    %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -34,10 +50,10 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img data-feather="user" alt="Login" stroke="white">
-                        <span style="color: white;">Jonathas</span>
+                        <span style="color: white;"><%=cli.toString()%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="./logout">Logout</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -54,126 +70,21 @@
     <div class="container">
         <main>
             <div class="row row-cols-1 row-cols-md-3">
-                <div class="col mb-4">
+            <%for(Produto p : prods)
+            {
+            	%>
+            	<div class="col mb-4">
                     <div class="card">
-                        <img src="img/Repelente.png" class="card-img-top" alt="Repelente">
+                        <img src="img/<%=p.getTipoRemedio()%>.png" class="card-img-top" alt="Repelente">
                         <div class="card-body">
-                            <h5 class="card-title">Repelente OFF!</h5>
-                            <p class="card-text">R$ 15,00</p>
+                            <h5 class="card-title"><%=p.getNomeRemedio()%>></h5>
+                            <p class="card-text"><%=p.getValUnit()%></p>
                             <button class="btn btn-primary">Detalhes</button>
                         </div>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/CremeFacial.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Creme Facial AVÈNE</h5>
-                            <p class="card-text">R$ 55,50</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/pastilha.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Pastilhas VALDA</h5>
-                            <p class="card-text">R$ 25,00</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/EnxaguanteBucal.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Enxaguante Bucal Listerine</h5>
-                            <p class="card-text">R$ 49,90</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Protetor Solar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Protetor Solar Facial Nivea FPS30</h5>
-                            <p class="card-text">R$ 25,83</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Xarope.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Xarope Expectorante Melagrião</h5>
-                            <p class="card-text">R$ 21,59</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Comprimido.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Imecap Hair</h5>
-                            <p class="card-text">R$ 60,00</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Colirio.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Colírio Moura Brasil</h5>
-                            <p class="card-text">R$ 14,99</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Vitamina.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Centrum Mulher</h5>
-                            <p class="card-text">R$ 233,40</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Creme Dental.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Creme Dental Colgate Total 12</h5>
-                            <p class="card-text">R$ 8,78</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Absorvente.svg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Absorvente Intimus com Abas</h5>
-                            <p class="card-text">R$ 13,97</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <img src="img/Curativo.svg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Curativos Transparentes Band-Aid</h5>
-                            <p class="card-text">R$ 6,79</p>
-                            <button class="btn btn-primary">Detalhes</button>
-                        </div>
-                    </div>
-                </div>
+            <%}
+            %>  
             </div>
             <nav id="paginacao">
                 <ul class="pagination justify-content-center">

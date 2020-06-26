@@ -2,7 +2,6 @@ package com.fatec.farmacia.persistence;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,25 +46,24 @@ public class DaoCliente implements IntDaoCliente{
 	@Override
 	public void cadastraCliente(Cliente cli, Endereco end) throws SQLException 
 	{
-		String sql = "{call sp_insercao(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+		String sql = "{call sp_insercao(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 		CallableStatement state = connect.prepareCall(sql);
 		state.setString(1, cli.getPrimeiroNome());
 		state.setString(2, cli.getSobreNome());
 		state.setString(3, cli.getCpf());
 		state.setString(4, cli.getTelfixo());
 		state.setString(5, cli.getTelcel());
-		java.sql.Date dtsql = new Date(cli.getNascimento().getTime());
-		state.setDate(6, dtsql);
-		state.setString(7, cli.getEmail());
-		state.setString(8, cli.getSenha());
-		state.setString(9, cli.getSexo());
+		state.setString(6, cli.getEmail());
+		state.setString(7, cli.getSenha());
+		state.setString(8, cli.getSexo());
+		state.setDate(9, cli.getNascimento());
 		state.setString(10, end.getCep());
 		state.setString(11, end.getLogradouro());
 		state.setInt(12, end.getPorta());
 		state.setString(13, end.getComplemento());
-		state.setString(14, end.getBairro());
+		state.setString(14, end.getUf());
 		state.setString(15, end.getCidade());
-		state.setString(16, end.getUf());
+		state.setString(16, end.getBairro());
 		state.execute();
 		System.out.println("Inserção realizada");
 		state.close();

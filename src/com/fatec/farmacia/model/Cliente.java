@@ -1,6 +1,6 @@
 package com.fatec.farmacia.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Cliente
 {
@@ -73,5 +73,10 @@ public class Cliente
 	}
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
+	}
+	@Override
+	public String toString() 
+	{
+		return this.primeiroNome;
 	}
 }

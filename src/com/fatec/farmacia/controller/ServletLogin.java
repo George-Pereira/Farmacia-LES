@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fatec.farmacia.model.Carrinho;
 import com.fatec.farmacia.model.Cliente;
 import com.fatec.farmacia.persistence.DaoCliente;
 import com.fatec.farmacia.persistence.IntDaoCliente;
@@ -37,6 +38,11 @@ public class ServletLogin extends HttpServlet
 			cli = dao.autenticaAcesso(user, pass);
 			if(cli != null) 
 			{
+				HttpSession session = req.getSession();
+				session.setAttribute("CLIENTE", cli);
+				Carrinho cartCli = new Carrinho();
+				cartCli.setIdCliente(cli.getId());
+				session.setAttribute("CARRINHO", cartCli);
 				resp.sendRedirect("./principal.jsp");
 			}
 			else 

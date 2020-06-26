@@ -1,4 +1,4 @@
-Create Database farmaciales
+Create  Database farmaciales
 go
 use farmaciales
 
@@ -72,6 +72,8 @@ insert into remedio values
 ('Bengala',3,'130.00','ajuda a fazer a locomoção',30),
 ('Biotonico Fontora',2,'40.00','Ajuda a Criança a se alimente',50)
 
+
+
 select * from remedio
 select * from tipo
 select * from cliente
@@ -110,8 +112,7 @@ select * from f_listagem('Biotonico Fontora')
 select * from f_listagem('Viagra')
 select * from f_listagem('Bengala')
 
-
-
+EXEC sp_configure 'default language', 1046
 
 
 /*LISTAGEM GENERICA*/
@@ -208,7 +209,6 @@ begin
 		Insert into endereco Values(@cep,@logradouro,@porta,@complent,@uf,@cidade,@bairro)
 		Insert into cliente Values(@fnome,@lnome,@cpf,@telfixo,@telcel,@email,@senha,@sexo,@datnto,@cep)
 end
-
 exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino','17/06/2015',111111,'Rua aguia de haia',61,'Viela','BH','Bahia','Pelorinho'
 exec sp_insercao 'Jose','Luiz','99999999',null,'(11)-321456789','JLuiz@hotmail.com','Rosas','Masculino','17/11/2015',88888,'Rua aguia de haia',61,'Bairro','RJ','Rio de Janeiro','Mesquita'
 exec sp_insercao 'George','Fernando','846454984','(11)-777777777','(88)-888888888','Fernandão@hotmail.com','Terra','Masculino','20/01/2015',999999,'Rua aguia de haia',39,'Alemeda','SP','São Paulo','Augusta'

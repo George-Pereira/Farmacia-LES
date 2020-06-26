@@ -1,5 +1,7 @@
 package com.fatec.farmacia.controller;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -21,21 +23,25 @@ public class ServletCadastro extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		cadastrar(req,resp);
+		try {
+			cadastrar(req,resp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void cadastrar(HttpServletRequest req, HttpServletResponse resp) 
+	private void cadastrar(HttpServletRequest req, HttpServletResponse resp) throws ParseException 
 	{
 		Cliente cli = new Cliente();
 		Endereco end = new Endereco();
 		cli.setPrimeiroNome(req.getParameter("Input_Nome"));
 		cli.setSobreNome(req.getParameter("Input_Sobrenome"));
 		cli.setCpf(req.getParameter("Input_CPF"));
-		@SuppressWarnings("deprecation")
-		long data = java.util.Date.parse(req.getParameter("Input_Data"));
-		Date nasc = new Date();
-		nasc.setTime(data);
-		cli.setNascimento(nasc);
+		String dn = req.getParameter("Input_Data");
+		Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(dn);
+		java.sql.Date dtNascimento = new java.sql.Date(dia.getTime());
+		cli.setNascimento(dtNascimento);
+		System.out.println(cli.getNascimento());
 		cli.setTelfixo(req.getParameter("Input_TelRes"));
 		cli.setTelcel(req.getParameter("Input_Cel"));
 		cli.setEmail(req.getParameter("Input_Email"));
@@ -45,6 +51,7 @@ public class ServletCadastro extends HttpServlet
 		end.setCep(req.getParameter("Input_CEP"));
 		end.setLogradouro(req.getParameter("Input_Rua"));
 		end.setPorta(Integer.parseInt(req.getParameter("Input_Numero")));
+		end.setComplemento("Input_Complemento");
 		end.setCidade(req.getParameter("Input_Cidade"));
 		end.setBairro(req.getParameter("Input_Bairro"));
 		end.setUf(req.getParameter("Input_Estado"));
