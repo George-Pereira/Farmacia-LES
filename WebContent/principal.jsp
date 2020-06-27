@@ -76,7 +76,7 @@ prods = dao.getTodosProd();
 				<div class="col mb-4">
 					<div class="card">
 						<img src="img/<%=p.getTipoRemedio()%>.png" class="card-img-top"
-							alt="Repelente">
+							alt="<%=p.getTipoRemedio()%>">
 						<div class="card-body">
 							<h5 class="card-title"><%=p.getNomeRemedio()%></h5>
 							<p class="card-text"><%=p.getValUnit()%></p>
@@ -136,6 +136,7 @@ prods = dao.getTodosProd();
 	<script>
         feather.replace();
     </script>
+    <script src="Resources/JS/principal.js"></script>
 </body>
 
 </html>

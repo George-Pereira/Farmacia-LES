@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.fatec.farmacia.model.Produto"%>
 <%@page import="com.fatec.farmacia.persistence.DaoProduto"%>
 <%@page import="com.fatec.farmacia.persistence.IntDaoProduto"%>
@@ -8,6 +9,7 @@
     	IntDaoProduto dao = new DaoProduto();
     	Produto prod = new Produto();
     	prod = dao.getProduto(idProd);
+    	DecimalFormat format = new DecimalFormat("0.00");
     	%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -64,7 +66,7 @@
 
     <main>
         <div class="container-fluid">
-            <a href="" id="voltar">
+            <a href="./principal.jsp" id="voltar">
                 <img src="img/Voltar.svg" alt="Voltar">
             </a>
             <div class="row row-cols-1 row-cols-md-3">
@@ -84,7 +86,7 @@
                 <div class="col mb-4">
                     <div class="compra">
                         <div class="preco">
-                            <span id="valor"><%=prod.getValUnit()%></span>
+                            <span id="valor"><%=Double.valueOf(format.format(prod.getValUnit()))%></span>
                             <span id="text">em até 12x sem juros no cartão de crédito</span>
                         </div>
                         <div class="qtd">
