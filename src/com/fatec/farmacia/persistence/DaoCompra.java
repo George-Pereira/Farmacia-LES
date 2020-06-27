@@ -28,9 +28,9 @@ public class DaoCompra implements IntDaoCompra
 		while(result.next()) 
 		{
 			Produtos_Venda pv = new Produtos_Venda();
-			pv.setId(result.getLong("cod_rem"));
-			pv.setNome(result.getString("nome_rem"));
-			pv.setReceitaProd(result.getDouble("valor_rem"));
+			pv.setId(result.getLong("cod_Prod"));
+			pv.setNome(result.getString("nome_Prod"));
+			pv.setReceitaProd(result.getDouble("valor_Prod"));
 			pv.setQtd(result.getInt("qntdVend"));
 			pv.setReceita((pv.getReceita() + result.getDouble("val_total")));
 		}

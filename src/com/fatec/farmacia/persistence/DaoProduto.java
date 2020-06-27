@@ -30,7 +30,7 @@ public class DaoProduto implements IntDaoProduto
 			prod.setNomeRemedio(res.getString("Nome"));
 			prod.setTipoRemedio(res.getString("Tipo"));
 			prod.setValUnit(res.getDouble("Preco"));
-			prod.setDetalhes(res.getString("Detalhe"));
+			prod.setDetalhes(res.getString("Descricao"));
 			itensLoja.add(prod);
 		}
 		return itensLoja;
@@ -38,18 +38,18 @@ public class DaoProduto implements IntDaoProduto
 	public Produto getProduto(long idProduto) throws SQLException 
 	{
 		Produto resultado = new Produto();
-		String sql = "SELECT prod.id, prod.re_nome, t.classe, prod.re_preco, prod.re_resu, prod.re_quant FROM remedio prod INNER JOIN tipo t ON prod.re_idtipo = t.id WHERE prod.id = ?";
+		String sql = "SELECT prod.id, prod.nomeProd, t.categoria, prod.preco, prod.descricao, prod.quantidade FROM produtos prod INNER JOIN tipo t ON prod.idtipo = t.id WHERE prod.id = ?";
 		PreparedStatement stmt = connect.prepareStatement(sql);
 		stmt.setLong(1, idProduto);
 		ResultSet result = stmt.executeQuery();
 		if(result.next()) 
 		{
 			resultado.setIdRemedio(result.getLong("id"));
-			resultado.setDetalhes(result.getString("re_resu"));
-			resultado.setNomeRemedio(result.getString("re_nome"));
-			resultado.setValUnit(result.getDouble("re_preco"));
-			resultado.setTipoRemedio(result.getString("classe"));
-			resultado.setQuantEst(result.getInt("re_quant"));
+			resultado.setDetalhes(result.getString("descricao"));
+			resultado.setNomeRemedio(result.getString("nomeProd"));
+			resultado.setValUnit(result.getDouble("preco"));
+			resultado.setTipoRemedio(result.getString("categoria"));
+			resultado.setQuantEst(result.getInt("quantidade"));
 		}
 		return resultado;
 	}

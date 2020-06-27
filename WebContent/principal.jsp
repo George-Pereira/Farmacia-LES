@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="com.fatec.farmacia.persistence.IntDaoProduto"%>
 <%@page import="com.fatec.farmacia.persistence.DaoProduto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -57,7 +59,7 @@ prods = dao.getTodosProd();
 						stroke="white"> <span style="color: white;"><%=cli.toString()%></span>
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="./logout">Logout</a>
+						<a class="dropdown-item" href="./logout?logout=true">Logout</a>
 					</div></li>
 				<li class="nav-item"><a class="nav-link" href=""
 					id="nav_carrinho"> <img data-feather="shopping-cart"
@@ -79,7 +81,7 @@ prods = dao.getTodosProd();
 							alt="<%=p.getTipoRemedio()%>">
 						<div class="card-body">
 							<h5 class="card-title"><%=p.getNomeRemedio()%></h5>
-							<p class="card-text">R$<%=p.getValUnit()%></p>
+							<p class="card-text"><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(p.getValUnit())%></p>
 							<button class="btn btn-primary"
 								onclick="enviaProduto(<%=p.getIdRemedio()%>)">Detalhes</button>
 						</div>

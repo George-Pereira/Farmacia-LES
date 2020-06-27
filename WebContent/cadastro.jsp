@@ -263,7 +263,7 @@
             });
             $('#input_CPF').mask('000.000.000-00');
             $('#input_CEP').mask('00000-000');
-            $('#input_Tel').mask('(00) 0000-0000');
+            $('#input_TelResidencial').mask('(00) 0000-0000');
             $('#input_Cel').mask('(00) 00000-0000');
             $('#input_Date').mask('00/00/0000');
         });
