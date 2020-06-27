@@ -97,7 +97,7 @@
                                     style="border-radius: 0 8px 8px 0;">+</button>
                             </div>
                         </div>
-                        <button id="comprar" class="btn btn-primary">
+                        <button id="comprar" class="btn btn-primary" >
                             <img data-feather="shopping-cart" alt="Carrinho" fill="white" stroke="white">
                             <span>Comprar</span>
                         </button>
