@@ -68,11 +68,8 @@ public class DaoProduto implements IntDaoProduto
 			prod.setQuantEst(result.getInt("Quantidade"));
 			prod.setTipoRemedio(result.getString("Tipo"));
 			prod.setValUnit(result.getDouble("Preco"));
+			lista.add(prod);
 		}
 		return lista;
-	}
-	@Override
-	public List<Produto> getProdutoporChave(String chaves) throws SQLException {
-		return null;
 	}
 }

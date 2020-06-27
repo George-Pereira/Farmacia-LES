@@ -1,4 +1,4 @@
-Create  Database farmaciales
+Create Database farmaciales
 go
 use farmaciales
 
@@ -102,7 +102,7 @@ begin
 	Declare @idremedio nvarchar(20),
 				 @qntd int
 	Insert @tabela(Id, Nome, Quantidade, Preco, Tipo) 
-	select p.id, p.nomeProd, p.quantidade, preco, t.categoria from produtos p INNER JOIN tipo t on p.idtipo = t.id where p.nomeProd LIKE Concat('%',@nome,'%')
+	select p.id, p.nomeProd, p.quantidade, preco, t.categoria from produtos p INNER JOIN tipo t on p.idtipo = t.id where p.nomeProd LIKE Concat(@nome,'%')
 return
 end
 

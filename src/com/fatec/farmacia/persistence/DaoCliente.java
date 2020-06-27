@@ -29,14 +29,15 @@ public class DaoCliente implements IntDaoCliente{
 		{
 			cli = new Cliente();
 			cli.setId(result.getLong("id"));
-			cli.setPrimeiroNome(result.getString("Nome"));
-			cli.setSobreNome(result.getString("Sobrenome"));
+			cli.setPrimeiroNome(result.getString("nome"));
+			cli.setSobreNome(result.getString("sobrenome"));
 			cli.setTelfixo(result.getString("telfixo"));
 			cli.setTelcel(result.getString("celular"));
 			cli.setCpf(result.getString("cpf"));
 			cli.setEmail(result.getString("email"));
 			cli.setSenha(result.getString("senha"));
 			cli.setSexo(result.getString("sexo"));
+			cli.setNascimento(result.getDate("dnasci"));
 		}
 		result.close();
 		stmt.close();
@@ -65,7 +66,6 @@ public class DaoCliente implements IntDaoCliente{
 		state.setString(15, end.getCidade());
 		state.setString(16, end.getBairro());
 		state.execute();
-		System.out.println("Inserção realizada");
 		state.close();
 		connect.close();
 	}

@@ -15,9 +15,18 @@ cli = (Cliente) session.getAttribute("CLIENTE");
 if (cli == null) {
 	response.sendRedirect("./login");
 }
-IntDaoProduto dao = new DaoProduto();
+String search;
+search = request.getParameter("ip_pesquisa");
 List<Produto> prods = new LinkedList<Produto>();
-prods = dao.getTodosProd();
+IntDaoProduto dao = new DaoProduto();
+if(search == null)
+{
+	prods = dao.getTodosProd();
+}
+else
+{
+	prods = dao.getProdutosporChave(search);
+}
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,10 +50,10 @@ prods = dao.getTodosProd();
 		<!--Desktop-->
 		<div class="collapse navbar-collapse justify-content-around"
 			id="navbarSupportedContent">
-			<a class="navbar-brand" href="" id="navImg"> <img
+			<a class="navbar-brand" href="./principal" id="navImg"> <img
 				src="img/Logo.png" alt="Logo Coronga Farma">
 			</a>
-			<form class="form-inline my-2 my-lg-0" id="search" action="./pesquisa" method="get">
+			<form class="form-inline my-2 my-lg-0" id="search" action="./principal.jsp" method="get">
 				<input class="form-control mr-sm-2" type="search" name="ip_pesquisa"
 					placeholder="O que está procurando..." aria-label="Search">
 				<button class="btn btn-primary my-2 my-sm-0" type="submit">
@@ -55,8 +64,7 @@ prods = dao.getTodosProd();
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> <img data-feather="user" alt="Login"
-						stroke="white"> <span style="color: white;"><%=cli.toString()%></span>
+					aria-expanded="false"> <img data-feather="user" alt="Login" stroke="white"> <span style="color: white;"><%=cli.toString()%></span>
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="./logout?logout=true">Logout</a>
@@ -73,6 +81,8 @@ prods = dao.getTodosProd();
 		<div class="container">
 			<div class="row row-cols-1 row-cols-md-3">
 				<%
+				if(!prods.isEmpty())
+				{
 					for (Produto p : prods) {
 				%>
 				<div class="col mb-4">
@@ -89,6 +99,7 @@ prods = dao.getTodosProd();
 				</div>
 				<%
 					}
+				}
 				%>
 			</div>
 			<nav id="paginacao">

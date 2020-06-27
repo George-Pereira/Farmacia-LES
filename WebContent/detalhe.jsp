@@ -1,3 +1,5 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Locale"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.fatec.farmacia.model.Produto"%>
 <%@page import="com.fatec.farmacia.persistence.DaoProduto"%>
@@ -83,7 +85,7 @@
                 <div class="col mb-4">
                     <div class="compra">
                         <div class="preco">
-                            <span id="valor">R$<%=prod.getValUnit()%></span>
+                            <span id="valor"><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(prod.getValUnit())%></span>
                             <span id="text">em até 12x sem juros no cartão de crédito</span>
                         </div>
                         <div class="qtd">
