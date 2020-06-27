@@ -7,6 +7,13 @@ public class Produto
 	private String tipoRemedio;
 	private double valUnit;
 	private String detalhes;
+	private int quantEst;
+	public int getQuantEst() {
+		return quantEst;
+	}
+	public void setQuantEst(int quantEst) {
+		this.quantEst = quantEst;
+	}
 	public long getIdRemedio() 
 	{
 		return idRemedio;

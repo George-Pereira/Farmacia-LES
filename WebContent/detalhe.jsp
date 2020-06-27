@@ -1,5 +1,14 @@
+<%@page import="com.fatec.farmacia.model.Produto"%>
+<%@page import="com.fatec.farmacia.persistence.DaoProduto"%>
+<%@page import="com.fatec.farmacia.persistence.IntDaoProduto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%  int intProd =Integer.parseInt(request.getParameter("id"));
+    	long idProd = intProd;
+    	IntDaoProduto dao = new DaoProduto();
+    	Produto prod = new Produto();
+    	prod = dao.getProduto(idProd);
+    	%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -35,7 +44,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img data-feather="user" alt="Login" stroke="white">
-                        <span style="color: white;">Jonathas</span>
+                        <span style="color: white;"><%=session.getAttribute("CLIENTE").toString()%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="">Logout</a>
@@ -61,21 +70,21 @@
             <div class="row row-cols-1 row-cols-md-3">
                 <div class="col mb-4">
                     <div class="imagem">
-                        <img src="img/Repelente.png" alt="Repelente">
+                        <img src="img/<%=prod.getTipoRemedio()%>.png" alt="Repelente">
                     </div>
                 </div>
                 <div class="col mb-4">
                     <div class="conteudo">
-                        <h2>Repelente OFF!</h2>
+                        <h2><%=prod.getNomeRemedio()%></h2>
                         <div class="descricao">
-                            <p>Repelente para passar no corpo para se livrar de pernelongos e insetos.</p>
+                            <p><%=prod.getDetalhes()%></p>
                         </div>
                     </div>
                 </div>
                 <div class="col mb-4">
                     <div class="compra">
                         <div class="preco">
-                            <span id="valor">R$ 15,00</span>
+                            <span id="valor"><%=prod.getValUnit()%></span>
                             <span id="text">em até 12x sem juros no cartão de crédito</span>
                         </div>
                         <div class="qtd">
