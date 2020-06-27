@@ -42,8 +42,8 @@ prods = dao.getTodosProd();
 			<a class="navbar-brand" href="" id="navImg"> <img
 				src="img/Logo.png" alt="Logo Coronga Farma">
 			</a>
-			<form class="form-inline my-2 my-lg-0" id="search">
-				<input class="form-control mr-sm-2" type="search"
+			<form class="form-inline my-2 my-lg-0" id="search" action="./pesquisa" method="get">
+				<input class="form-control mr-sm-2" type="search" name="ip_pesquisa"
 					placeholder="O que está procurando..." aria-label="Search">
 				<button class="btn btn-primary my-2 my-sm-0" type="submit">
 					<img src="img/search.svg" alt="Pesquisar">
@@ -79,7 +79,7 @@ prods = dao.getTodosProd();
 							alt="<%=p.getTipoRemedio()%>">
 						<div class="card-body">
 							<h5 class="card-title"><%=p.getNomeRemedio()%></h5>
-							<p class="card-text"><%=p.getValUnit()%></p>
+							<p class="card-text">R$<%=p.getValUnit()%></p>
 							<button class="btn btn-primary"
 								onclick="enviaProduto(<%=p.getIdRemedio()%>)">Detalhes</button>
 						</div>

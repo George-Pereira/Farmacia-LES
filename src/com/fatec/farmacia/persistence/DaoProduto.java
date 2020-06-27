@@ -53,4 +53,26 @@ public class DaoProduto implements IntDaoProduto
 		}
 		return resultado;
 	}
+	public List<Produto> getProdutosporChave(String chaves) throws SQLException
+	{
+		List<Produto> lista = new LinkedList<Produto>();
+		String sql = "SELECT * FROM f_listagem(?)";
+		PreparedStatement stmt = connect.prepareStatement(sql);
+		stmt.setString(1, chaves);
+		ResultSet result = stmt.executeQuery();
+		while(result.next()) 
+		{
+			Produto prod = new Produto();
+			prod.setIdRemedio(result.getLong("Id"));
+			prod.setNomeRemedio(result.getString("Nome"));
+			prod.setQuantEst(result.getInt("Quantidade"));
+			prod.setTipoRemedio(result.getString("Tipo"));
+			prod.setValUnit(result.getDouble("Preco"));
+		}
+		return lista;
+	}
+	@Override
+	public List<Produto> getProdutoporChave(String chaves) throws SQLException {
+		return null;
+	}
 }

@@ -7,35 +7,53 @@ public class Produtos_Venda
 	private double precoUnit;
 	private double receitaProd;
 	private double receita;
-	public long getId() {
+	private int qtd;
+	public long getId() 
+	{
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
-	public String getNome() {
+	public String getNome() 
+	{
 		return nome;
 	}
-	public void setNome(String nome) {
+	public void setNome(String nome) 
+	{
 		this.nome = nome;
 	}
-	public double getPrecoUnit() {
+	public double getPrecoUnit() 
+	{
 		return precoUnit;
 	}
-	public void setPrecoUnit(double precoUnit) {
+	public void setPrecoUnit(double precoUnit) 
+	{
 		this.precoUnit = precoUnit;
 	}
-	public double getReceitaProd() {
+	public double getReceitaProd() 
+	{
 		return receitaProd;
 	}
-	public void setReceitaProd(double receitaProd) {
+	public void setReceitaProd(double receitaProd) 
+	{
 		this.receitaProd = receitaProd;
 	}
-	public double getReceita() {
+	public double getReceita() 
+	{
 		return receita;
 	}
-	public void setReceita(double receita) {
+	public void setReceita(double receita) 
+	{
 		this.receita = receita;
+	}
+	public int getQtd() 
+	{
+		return qtd;
+	}
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
 	}
 	
 	

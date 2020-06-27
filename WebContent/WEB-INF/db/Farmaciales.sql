@@ -1,4 +1,4 @@
-Create  Database farmaciales
+Create Database farmaciales
 go
 use farmaciales
 
@@ -62,18 +62,17 @@ foreign key (cli_id) references cliente(id),
 foreign key (rem_id) references remedio(id)
 )
 
+drop table remedio
+drop table tipo
+drop table compra
 insert into tipo values
-('Pilula'),
-('Xarope'),
-('Acessorio')
+('Comprimido'),
+('Curativo'),
+('Pastilha')
 insert into remedio values
-('Cloroquina',1,'69.99','Previni covid-19',50),
-('Viagra',1,'120.50','Permite ereçoes durante horas',20),
-('Bengala',3,'130.00','ajuda a fazer a locomoção',30),
-('Biotonico Fontora',2,'40.00','Ajuda a Criança a se alimente',50)
-
-
-
+('Buscopan',1,'69.99','Cólicas intestinais',50),
+('Band-Aid',2,'30.00','Curativos para todo tipo de lesão/corte',20),
+('Pastilha Strepsils',3,'40.00','Pastilhas para irritações e dores de garganta',30)
 select * from remedio
 select * from tipo
 select * from cliente
@@ -91,6 +90,7 @@ delete compra
 
 Create function f_listagem(@nome varchar(100))
 RETURNS @tabela table(
+Id	int,
 Nome varchar(100),
 Quantidade int,
 Preco decimal(7,2),
@@ -101,7 +101,7 @@ begin
 	Declare @idremedio nvarchar(20),
 				 @qntd int
 	Insert @tabela(Nome,Quantidade,Preco,Tipo) 
-	select r.re_nome,r.re_quant,re_preco,t.classe from remedio r INNER JOIN tipo t on r.re_idtipo=t.id where r.re_nome LIKE Concat('%',@nome,'%')
+	select r.id, r.re_nome,r.re_quant,re_preco,t.classe from remedio r INNER JOIN tipo t on r.re_idtipo=t.id where r.re_nome LIKE Concat('%',@nome,'%')
 return
 end
 
@@ -112,7 +112,6 @@ select * from f_listagem('Biotonico Fontora')
 select * from f_listagem('Viagra')
 select * from f_listagem('Bengala')
 
-EXEC sp_configure 'default language', 1046
 
 
 /*LISTAGEM GENERICA*/
@@ -162,6 +161,7 @@ end
 exec sp_venda 1,1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
 exec sp_venda 1,1,2,'Viagra','pilula','22/05/2020',2,'120.50'
 exec sp_venda 2,2,2,'Viagra','pilula','22/05/2020',2,'120.50'
+
 select * from compra
 select * from remedio
 
@@ -209,10 +209,14 @@ begin
 		Insert into endereco Values(@cep,@logradouro,@porta,@complent,@uf,@cidade,@bairro)
 		Insert into cliente Values(@fnome,@lnome,@cpf,@telfixo,@telcel,@email,@senha,@sexo,@datnto,@cep)
 end
-exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino','17/06/2015',111111,'Rua aguia de haia',61,'Viela','BH','Bahia','Pelorinho'
+DECLARE @data DATE
+SET @data = (SELECT GETDATE())
+
+exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino', @data ,111111,'Rua aguia de haia',61,'Viela','BH','Bahia','Pelorinho'
 exec sp_insercao 'Jose','Luiz','99999999',null,'(11)-321456789','JLuiz@hotmail.com','Rosas','Masculino','17/11/2015',88888,'Rua aguia de haia',61,'Bairro','RJ','Rio de Janeiro','Mesquita'
 exec sp_insercao 'George','Fernando','846454984','(11)-777777777','(88)-888888888','Fernandão@hotmail.com','Terra','Masculino','20/01/2015',999999,'Rua aguia de haia',39,'Alemeda','SP','São Paulo','Augusta'
-
+delete cliente
+delete endereco
 select * from cliente
 select * from endereco
 

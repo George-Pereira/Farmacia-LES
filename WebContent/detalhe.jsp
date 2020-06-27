@@ -10,10 +10,9 @@
     	Produto prod = new Produto();
     	prod = dao.getProduto(idProd);
     	DecimalFormat format = new DecimalFormat("0.00");
-    	%>
+    %>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +21,6 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="Resources/CSS/Detalhes.css">
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="nav_principal">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -63,7 +61,6 @@
             </ul>
         </div>
     </nav>
-
     <main>
         <div class="container-fluid">
             <a href="./principal.jsp" id="voltar">
@@ -86,7 +83,7 @@
                 <div class="col mb-4">
                     <div class="compra">
                         <div class="preco">
-                            <span id="valor"><%=Double.valueOf(format.format(prod.getValUnit()))%></span>
+                            <span id="valor">R$<%=prod.getValUnit()%></span>
                             <span id="text">em até 12x sem juros no cartão de crédito</span>
                         </div>
                         <div class="qtd">

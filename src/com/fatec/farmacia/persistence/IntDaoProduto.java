@@ -9,4 +9,5 @@ public interface IntDaoProduto
 {
 	public List<Produto> getTodosProd() throws SQLException;
 	public Produto getProduto(long idProd) throws SQLException;
+	public List<Produto> getProdutoporChave(String chaves) throws SQLException;
 }
