@@ -1,4 +1,4 @@
-Create Database farmaciales
+Create  Database farmaciales
 go
 use farmaciales
 
@@ -7,8 +7,8 @@ CREATE TABLE endereco
 (
 cep varchar(11) not null,
 logradouro varchar(50)not null,
-porta int not null,
-complent varchar(50)not null,
+numero int not null,
+complento varchar(50),
 uf char(2)not null,
 cidade varchar(100)not null,
 bairro varchar(100)not null,
@@ -18,19 +18,18 @@ Primary Key (cep)
 create table tipo
 (
 id int identity (1,1) primary key,
-classe varchar(100) ,
+categoria varchar(100) ,
 )
-
 
 
 CREATE TABLE cliente
 (
 id int identity (1,1) primary key,
-fnome varchar(50)not null,
-lnome varchar(50)not null,
+Nome varchar(50)not null,
+Sobrenome varchar(50)not null,
 cpf		varchar(11)not null,
 telfixo varchar(14),
-telcelu varchar(15) not null,
+celular varchar(15) not null,
 email varchar(100) not null,
 senha varchar(20)not null,
 sexo varchar(20)not null,
@@ -39,52 +38,54 @@ c_cep varchar(11) not null,
 foreign key (c_cep) references endereco(cep)
 )
 
-create table remedio
+create table produtos
 (
 id int identity (1,1) primary key,
-re_nome varchar(100),
-re_idtipo int,
-re_preco decimal(7,2),
-re_resu varchar(200),
-re_quant int,
-foreign key (re_idtipo) references tipo(id)
+nomeProd varchar(100),
+idtipo int,
+preco decimal(7,2),
+descricao varchar(200),
+quantidade int,
+foreign key (idtipo) references tipo(id)
 )
 
 create table compra(
 id int ,
 cli_id int,
-rem_id int,
-c_qntd int ,
+prod_id int,
+qntd int ,
 dtcompra date,
 val_total decimal(7,2),
 Constraint pk_compra PRIMARY KEY (id,dtcompra),
 foreign key (cli_id) references cliente(id),
-foreign key (rem_id) references remedio(id)
+foreign key (prod_id) references produtos(id)
 )
 
-drop table remedio
-drop table tipo
-drop table compra
 insert into tipo values
 ('Comprimido'),
 ('Curativo'),
-('Pastilha')
-insert into remedio values
+('Pastilha'),
+('Protetor Solar')
+insert into produtos values
 ('Buscopan',1,'69.99','Cólicas intestinais',50),
 ('Band-Aid',2,'30.00','Curativos para todo tipo de lesão/corte',20),
-('Pastilha Strepsils',3,'40.00','Pastilhas para irritações e dores de garganta',30)
-select * from remedio
+('Pastilha Strepsils',3,'40.00','Pastilhas para irritações e dores de garganta',30),
+('Protetor Solar 30FPS',4,'80.00','Protetor Solar Do Rafael',80)
+
+
+select * from produtos
 select * from tipo
 select * from cliente
 select * from endereco
 select * from compra
 
-delete  remedio
-delete tipo
+drop table  produtos
+drop table tipo
 delete  cliente
 delete endereco
-delete compra
-
+drop table compra
+use master
+drop database farmaciales
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Listagem especifica*/
 
@@ -100,18 +101,12 @@ as
 begin 
 	Declare @idremedio nvarchar(20),
 				 @qntd int
-	Insert @tabela(Nome,Quantidade,Preco,Tipo) 
-	select r.id, r.re_nome,r.re_quant,re_preco,t.classe from remedio r INNER JOIN tipo t on r.re_idtipo=t.id where r.re_nome LIKE Concat('%',@nome,'%')
+	Insert @tabela(Id, Nome, Quantidade, Preco, Tipo) 
+	select p.id, p.nomeProd, p.quantidade, preco, t.categoria from produtos p INNER JOIN tipo t on p.idtipo = t.id where p.nomeProd LIKE Concat('%',@nome,'%')
 return
 end
 
-select * from f_listagem('Cloro')
-select * from f_listagem('Cloroquina')
-select * from f_listagem('Bio')
-select * from f_listagem('Biotonico Fontora')
-select * from f_listagem('Viagra')
-select * from f_listagem('Bengala')
-
+EXEC sp_configure 'default language', 1046
 
 
 /*LISTAGEM GENERICA*/
@@ -122,14 +117,14 @@ Nome varchar(100),
 Quantidade int,
 Preco decimal(7,2),
 Tipo varchar(20),
-Detalhe varchar(200)
+Descricao varchar(200)
 )
 as
 begin 
 	Declare @nome varchar(100),
 				 @qntd int
-	Insert @tabela(id,Nome,Quantidade,Preco,Tipo, Detalhe) 
-	select r.id,r.re_nome,r.re_quant,re_preco,t.classe, re_resu from remedio r INNER JOIN tipo t on r.re_idtipo=t.id
+	Insert @tabela(id,Nome,Quantidade,Preco,Tipo, Descricao) 
+	select p.id,p.nomeProd,p.quantidade,preco,t.categoria, descricao from produtos p INNER JOIN tipo t on p.idtipo = t.id
 return
 end
 
@@ -153,34 +148,28 @@ begin
 					 @quantidade_removido int
 		set @valor_compra =SUM(@Quant_compra*@valor_Remedio)
 		INSERT INTO compra values (@codvenda,@codcli,@codrem,@Quant_compra,@d_compra,@valor_compra)
-		set @quantidade_remedio =(select re_quant from remedio where id = @codrem)
+		set @quantidade_remedio =(select quantidade from produtos where id = @codrem)
 		set @quantidade_removido =SUM(@quantidade_remedio-@Quant_compra)
-		 update remedio set re_quant = @quantidade_removido where id = @codrem
+		 update produtos set quantidade = @quantidade_removido where id = @codrem
 end
 
-exec sp_venda 1,1,1,'Cloroquina','pilula','20/05/2020',5,'69.50'
-exec sp_venda 1,1,2,'Viagra','pilula','22/05/2020',2,'120.50'
-exec sp_venda 2,2,2,'Viagra','pilula','22/05/2020',2,'120.50'
-
-select * from compra
-select * from remedio
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função para um relatorio(nome do produto,quantidade e vendas)
 
 CREATE  function f_relatorio()
 RETURNS @tabela table(
-cod_rem int,
-nome_rem varchar(100),
+cod_Prod int,
+nome_Prod varchar(100),
 qntdVend int,
-valor_rem decimal(7,2),
+valor_Prod decimal(7,2),
 valor_vend decimal(7,2),
 dtcompra date
 ) 
 as 
 begin
-		Insert  @tabela(cod_rem,nome_rem,qntdVend,valor_rem,valor_vend,dtcompra)
-		select r.id,r.re_nome,c.c_qntd,r.re_preco,c.val_total,c.dtcompra  from remedio r INNER JOIN compra c on r.id = c.rem_id
+		Insert  @tabela(cod_Prod,nome_Prod,qntdVend,valor_Prod,valor_vend,dtcompra)
+		select p.id,p.nomeProd,c.qntd,p.preco,c.val_total,c.dtcompra  from produtos p INNER JOIN compra c on p.id = c.prod_id
 		return
 end
 
@@ -209,16 +198,7 @@ begin
 		Insert into endereco Values(@cep,@logradouro,@porta,@complent,@uf,@cidade,@bairro)
 		Insert into cliente Values(@fnome,@lnome,@cpf,@telfixo,@telcel,@email,@senha,@sexo,@datnto,@cep)
 end
-DECLARE @data DATE
-SET @data = (SELECT GETDATE())
 
-exec sp_insercao 'Rafael','Borges','69420420691','(11)-321456789','(99)-999999999','rafael@hotmail.com','Aves','Masculino', @data ,111111,'Rua aguia de haia',61,'Viela','BH','Bahia','Pelorinho'
-exec sp_insercao 'Jose','Luiz','99999999',null,'(11)-321456789','JLuiz@hotmail.com','Rosas','Masculino','17/11/2015',88888,'Rua aguia de haia',61,'Bairro','RJ','Rio de Janeiro','Mesquita'
-exec sp_insercao 'George','Fernando','846454984','(11)-777777777','(88)-888888888','Fernandão@hotmail.com','Terra','Masculino','20/01/2015',999999,'Rua aguia de haia',39,'Alemeda','SP','São Paulo','Augusta'
-delete cliente
-delete endereco
-select * from cliente
-select * from endereco
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --função login
@@ -226,11 +206,11 @@ select * from endereco
 Create function f_validaLogin(@email varchar(100),@senha varchar(20))
 RETURNS @tabela table(
 id int ,
-fnome varchar(50),
-lnome varchar(50),
+nome varchar(50),
+sobrenome varchar(50),
 cpf		varchar(11),
 telfixo varchar(14),
-telcelu varchar(15) ,
+celular varchar(15) ,
 email varchar(100) ,
 senha varchar(20),
 sexo varchar(20),
@@ -248,8 +228,8 @@ DECLARE	@validaEmail varchar(100),
 		if(@senha = @validaSenha)
 			Begin
 				Set @Resultado = 'Concetado!'
-				 insert @tabela(id,fnome,lnome,cpf,telfixo,telcelu,email,senha,sexo,dnasci) 
-				 select id,fnome,lnome,cpf,telfixo,telcelu,email,senha,sexo,dnasci from cliente where email =@email
+				 insert @tabela(id,nome,sobrenome,cpf,telfixo,celular,email,senha,sexo,dnasci) 
+				 select id,nome,sobrenome,cpf,telfixo,celular,email,senha,sexo,dnasci from cliente where email =@email
 			End
 	  End
 	else
@@ -258,6 +238,4 @@ DECLARE	@validaEmail varchar(100),
 		End
 		return
 end
- 
-select * from f_validaLogin('rafael@hotmail.com','Aves')
-select * from f_validaLogin('afsdfasfasf','coringa')
+
