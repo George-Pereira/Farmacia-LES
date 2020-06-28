@@ -31,10 +31,10 @@
         </button>
         <!--Desktop-->
         <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
-            <a class="navbar-brand" href="" id="navImg">
+            <a class="navbar-brand" href="./principal.jsp" id="navImg">
                 <img src="img/Logo.png" alt="Logo Coronga Farma">
             </a>
-            <form class="form-inline my-2 my-lg-0" id="search">
+            <form class="form-inline my-2 my-lg-0" id="search" action="./principal.jsp" method="get">
                 <input class="form-control mr-sm-2" type="search" placeholder="O que está procurando..."
                     aria-label="Search">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">
@@ -49,14 +49,14 @@
                         <span style="color: white;"><%=session.getAttribute("CLIENTE").toString()%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="./logout?logout=true">Logout</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="" id="nav_carrinho">
+                    <a class="nav-link" href="./carrinho.jsp" id="nav_carrinho">
                         <img data-feather="shopping-cart" alt="Carrinho" fill="white" stroke="white">
                         <div id="qtd_animated">
-                            0
+                        	0
                         </div>
                     </a>
                 </li>

@@ -1,6 +1,8 @@
-<%@page import="com.fatec.farmacia.model.Produto"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="com.fatec.farmacia.model.Carrinho"%>
 <%@page import="com.fatec.farmacia.model.Cliente"%>
+<%@page import="com.fatec.farmacia.model.Produto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -9,7 +11,8 @@ cli = (Cliente) session.getAttribute("CLIENTE");
 if (cli == null) {
 	response.sendRedirect("./login");
 }
-List<Produto> cartCli = (List<Produto>) session.getAttribute("CARRINHO");
+Carrinho cartCli = (Carrinho) session.getAttribute("CARRINHO");
+double tot = 0;
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -39,7 +42,7 @@ List<Produto> cartCli = (List<Produto>) session.getAttribute("CARRINHO");
 			<a class="navbar-brand" href="" id="navImg"> <img
 				src="img/Logo.png" alt="Logo Coronga Farma">
 			</a>
-			<form class="form-inline my-2 my-lg-0" id="search">
+			<form class="form-inline my-2 my-lg-0" id="search" action="./principal.jsp" method="get">
 				<input class="form-control mr-sm-2" type="search"
 					placeholder="O que está procurando..." aria-label="Search">
 				<button class="btn btn-primary my-2 my-sm-0" type="submit">
@@ -54,7 +57,7 @@ List<Produto> cartCli = (List<Produto>) session.getAttribute("CARRINHO");
 						stroke="white"> <span style="color: white;"><%=session.getAttribute("CLIENTE").toString()%></span>
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="">Logout</a>
+						<a class="dropdown-item" href="./logout?logout=true">Logout</a>
 					</div></li>
 				<li class="nav-item"><a class="nav-link" href=""
 					id="nav_carrinho"> <img data-feather="shopping-cart"
@@ -66,24 +69,33 @@ List<Produto> cartCli = (List<Produto>) session.getAttribute("CARRINHO");
 	</nav>
 	<main>
 		<div class="container">
-			<div class="row row-cols-1 row-cols-md-3">
+			<% for(Produto p : cartCli.getCart())
+			{ 
+				tot = tot + (p.getValUnit()* p.getQuant());
+			%>
+				<div class="row row-cols-1 row-cols-md-3">
 				<div class="col mb-4">
 					<div class="card text-center" id="card">
-						<h2 class="card-title">Pastilha</h2>
-						<img src="img/Pastilha.png" class="card-img-top" id="img" alt="">
+						<h2 class="card-title"><%=p.getNomeRemedio()%></h2>
+						<img src="img/<%=p.getTipoRemedio()%>.png" class="card-img-top" id="img" alt="<%=p.getTipoRemedio()%>">
 						<div class="card-body">
-							<p class="card-text" id="valor">R$ 6,79</p>
-							<button class="lata" onclick="Deleta('')">
+							<p class="card-text" id="valor"><%=p.getValUnit()%></p>
+							<button class="lata" onclick="Deleta('<%=p.getIdRemedio()%>')">
 								<img src="img/LataLixo.svg" alt="Lata de Lixo">
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			<%}%>
 		</div>
 		<div class="lista">
 			<div class="list">
-				<p class="listp">1 X Pastilhas -> Unid. R$ 15,00</p>
+			<%for(Produto p : cartCli.getCart())
+			{%> 
+				<p class="listp"><%=p.getQuant()%> X <%=p.getNomeRemedio()%> -> Unid. <%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(p.getValUnit())%></p>
+			<%}
+				%>
 			</div>
 			<div class="total">
 				<span id="textTot">Total:</span> <span id="tot">R$ 15,00</span>

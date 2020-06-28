@@ -50,7 +50,7 @@ else
 		<!--Desktop-->
 		<div class="collapse navbar-collapse justify-content-around"
 			id="navbarSupportedContent">
-			<a class="navbar-brand" href="./principal" id="navImg"> <img
+			<a class="navbar-brand" href="./principal.jsp" id="navImg"> <img
 				src="img/Logo.png" alt="Logo Coronga Farma">
 			</a>
 			<form class="form-inline my-2 my-lg-0" id="search" action="./principal.jsp" method="get">
@@ -69,7 +69,7 @@ else
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="./logout?logout=true">Logout</a>
 					</div></li>
-				<li class="nav-item"><a class="nav-link" href=""
+				<li class="nav-item"><a class="nav-link" href="./carrinho.jsp"
 					id="nav_carrinho"> <img data-feather="shopping-cart"
 						alt="Carrinho" fill="white" stroke="white">
 						<div id="qtd_animated">0</div>

@@ -1,5 +1,8 @@
 package com.fatec.farmacia.controller;
 
-public class ServletAdm {
+import javax.servlet.http.HttpServlet;
+
+public class ServletAdm extends HttpServlet 
+{
 
 }

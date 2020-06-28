@@ -8,6 +8,7 @@ public class Produto
 	private double valUnit;
 	private String detalhes;
 	private int quantEst;
+	private int quant;
 	public int getQuantEst() {
 		return quantEst;
 	}
@@ -49,5 +50,11 @@ public class Produto
 	}
 	public void setDetalhes(String detalhes) {
 		this.detalhes = detalhes;
+	}
+	public int getQuant() {
+		return quant;
+	}
+	public void setQuant(int quant) {
+		this.quant = quant;
 	}
 }
