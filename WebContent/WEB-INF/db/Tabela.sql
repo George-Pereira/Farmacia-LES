@@ -62,6 +62,15 @@ foreign key (cli_id) references cliente(id),
 foreign key (prod_id) references produtos(id)
 )
 
+create table adm
+(
+id_adm int not null PRIMARY KEY,
+nome varchar(50)not null,
+email varchar(100) not null,
+senha varchar(20)not null
+)
+
+
 insert into tipo values
 ('Comprimido'),
 ('Curativo'),
@@ -87,6 +96,9 @@ delete endereco
 drop table compra
 use master
 drop database farmaciales
+
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Listagem especifica*/
 
