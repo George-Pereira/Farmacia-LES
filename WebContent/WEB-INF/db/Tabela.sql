@@ -221,21 +221,13 @@ BEGIN
 DECLARE	@validaEmail varchar(100),
 					@validaSenha varchar(20),
 					@Resultado varchar(20)
-	Set @validaEmail = (select email from cliente where email = @email)
-	Set @validaSenha = (select senha from cliente where senha = @senha)
-	if(@email = @validaemail)
-	 Begin
-		if(@senha = @validaSenha)
-			Begin
-				Set @Resultado = 'Concetado!'
-				 insert @tabela(id,nome,sobrenome,cpf,telfixo,celular,email,senha,sexo,dnasci) 
-				 select id,nome,sobrenome,cpf,telfixo,celular,email,senha,sexo,dnasci from cliente where email =@email
-			End
-	  End
-	else
-		Begin 
-			Set @Resultado = 'Não Concetado!'
-		End
-		return
+	SET @validaEmail = (SELECT email FROM cliente WHERE email = @email AND senha = @senha) 
+	SET @validaSenha = (SELECT senha FROM cliente WHERE email = @email AND senha = @senha)
+	if(@email = @validaemail AND @validaSenha = @senha)
+	Begin
+		Set @Resultado = 'Concetado!'
+	    insert @tabela(id,nome,sobrenome,cpf,telfixo,celular,email,senha,sexo,dnasci) 
+		select id,nome,sobrenome,cpf,telfixo,celular,email,senha,sexo,dnasci from cliente where email = @email
+	End
+	return
 end
-
