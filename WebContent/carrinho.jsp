@@ -39,7 +39,7 @@ double tot = 0;
 		<!--Desktop-->
 		<div class="collapse navbar-collapse justify-content-around"
 			id="navbarSupportedContent">
-			<a class="navbar-brand" href="" id="navImg"> <img
+			<a class="navbar-brand" href="./principal" id="navImg"> <img
 				src="img/Logo.png" alt="Logo Coronga Farma">
 			</a>
 			<form class="form-inline my-2 my-lg-0" id="search" action="./principal.jsp" method="get">
@@ -62,7 +62,7 @@ double tot = 0;
 				<li class="nav-item"><a class="nav-link" href=""
 					id="nav_carrinho"> <img data-feather="shopping-cart"
 						alt="Carrinho" fill="white" stroke="white">
-						<div id="qtd_animated">0</div>
+						<div id="qtd_animated"><%=cartCli.getCart().size()%></div>
 				</a></li>
 			</ul>
 		</div>
@@ -79,7 +79,7 @@ double tot = 0;
 						<h2 class="card-title"><%=p.getNomeRemedio()%></h2>
 						<img src="img/<%=p.getTipoRemedio()%>.png" class="card-img-top" id="img" alt="<%=p.getTipoRemedio()%>">
 						<div class="card-body">
-							<p class="card-text" id="valor"><%=p.getValUnit()%></p>
+							<p class="card-text" id="valor"><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(p.getValUnit())%></p>
 							<button class="lata" onclick="Deleta('<%=p.getIdRemedio()%>')">
 								<img src="img/LataLixo.svg" alt="Lata de Lixo">
 							</button>
@@ -98,7 +98,7 @@ double tot = 0;
 				%>
 			</div>
 			<div class="total">
-				<span id="textTot">Total:</span> <span id="tot">R$ 15,00</span>
+				<span id="textTot">Total:</span> <span id="tot"><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(tot) %></span>
 			</div>
 			<div class="botoes">
 				<button id="cancelar" class="btn btn-light">Cancelar</button>

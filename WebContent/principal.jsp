@@ -1,3 +1,4 @@
+<%@page import="com.fatec.farmacia.model.Carrinho"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="com.fatec.farmacia.persistence.IntDaoProduto"%>
@@ -19,6 +20,7 @@ String search;
 search = request.getParameter("ip_pesquisa");
 List<Produto> prods = new LinkedList<Produto>();
 IntDaoProduto dao = new DaoProduto();
+Carrinho cartCli = (Carrinho) session.getAttribute("CARRINHO");
 if(search == null)
 {
 	prods = dao.getTodosProd();
@@ -72,7 +74,7 @@ else
 				<li class="nav-item"><a class="nav-link" href="./carrinho.jsp"
 					id="nav_carrinho"> <img data-feather="shopping-cart"
 						alt="Carrinho" fill="white" stroke="white">
-						<div id="qtd_animated">0</div>
+						<div id="qtd_animated"><%=cartCli.getCart().size()%></div>
 				</a></li>
 			</ul>
 		</div>

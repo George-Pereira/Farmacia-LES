@@ -1,3 +1,5 @@
+<%@page import="com.fatec.farmacia.model.Carrinho"%>
+<%@page import="com.fatec.farmacia.model.Cliente"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -12,6 +14,13 @@
     	Produto prod = new Produto();
     	prod = dao.getProduto(idProd);
     	DecimalFormat format = new DecimalFormat("0.00");
+    	Cliente cli = new Cliente();
+    	cli = (Cliente)session.getAttribute("CLIENTE");
+    	Carrinho cartCli = new Carrinho();
+    	if(cli != null)
+    	{
+    		cartCli = (Carrinho) session.getAttribute("CARRINHO");
+    	}
     %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -56,7 +65,7 @@
                     <a class="nav-link" href="./carrinho.jsp" id="nav_carrinho">
                         <img data-feather="shopping-cart" alt="Carrinho" fill="white" stroke="white">
                         <div id="qtd_animated">
-                        	0
+                        	<%=cartCli.getCart().size()%>
                         </div>
                     </a>
                 </li>
@@ -90,14 +99,13 @@
                         </div>
                         <div class="qtd">
                             <div class="quantidade-produtos">
-                                <button type="button" class="buttons qty-minus"
-                                    style="border-radius: 8px 0 0 8px;">-</button>
-                                <input id="'.$vetor->$i->getID().'" value="0" min="0" max="1000" step="1" type="number">
+                                <button type="button" class="buttons qty-minus" style="border-radius: 8px 0 0 8px;">-</button>
+                                <input id="input_qtd" value="0" min="0" max="1000" step="1" type="number">
                                 <button type="button" class="buttons qty-plus"
                                     style="border-radius: 0 8px 8px 0;">+</button>
                             </div>
                         </div>
-                        <button id="comprar" class="btn btn-primary" >
+                        <button id="comprar" class="btn btn-primary" onclick="carrinho(<%=prod.getIdRemedio()%>)" method="get">
                             <img data-feather="shopping-cart" alt="Carrinho" fill="white" stroke="white">
                             <span>Comprar</span>
                         </button>
@@ -116,7 +124,6 @@
             </div>
         </div>
     </footer>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -132,6 +139,7 @@
         feather.replace();
     </script>
     <script src="Resources/JS/detalhes.js"></script>
+    <script src="Resources/JS/confdetalhe.js"></script>
 </body>
 
 </html>
