@@ -102,7 +102,7 @@ double tot = 0;
 			</div>
 			<div class="botoes">
 				<button id="cancelar" class="btn btn-light">Cancelar</button>
-				<button id="comprar" class="btn btn-primary">Comprar</button>
+				<button id="comprar" class="btn btn-primary" onclick="efetuarCompra()">Comprar</button>
 			</div>
 		</div>
 		</div>
@@ -125,6 +125,6 @@ double tot = 0;
 	<script>
 		feather.replace();
 	</script>
+	<script src="Resources/JS/compra.js"></script>
 </body>
-
 </html>
