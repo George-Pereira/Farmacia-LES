@@ -36,9 +36,10 @@ public class ServletCompra extends HttpServlet
 			{
 				dao.comprar(p, cart.getIdCliente(),idCompra);
 				cart.getCart().clear();
+				resp.sendRedirect("./carrinho.jsp");
 			}
 		}
-		catch (SQLException e) 
+		catch (SQLException | IOException e) 
 		{
 			e.printStackTrace();
 		}

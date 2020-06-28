@@ -49,14 +49,15 @@ quantidade int,
 foreign key (idtipo) references tipo(id)
 )
 
-create table compra(
+create table compra
+(
 id int ,
 cli_id int,
 prod_id int,
 qntd int ,
 dtcompra date,
 val_total decimal(7,2),
-Constraint pk_compra PRIMARY KEY (id,dtcompra),
+Constraint pk_compra PRIMARY KEY (id, prod_id, cli_id, dtcompra),
 foreign key (cli_id) references cliente(id),
 foreign key (prod_id) references produtos(id)
 )
@@ -231,3 +232,5 @@ DECLARE	@validaEmail varchar(100),
 	End
 	return
 end
+
+SELECT * FROM compra
