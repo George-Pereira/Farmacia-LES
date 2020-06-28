@@ -45,7 +45,7 @@
     <main>
         <div class="container">
             <h1 id="title">Cadastrar Produto</h1>
-            <form id="formCad" action="" method="post">
+            <form id="form" action="" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="input_Nome">Nome</label>
@@ -85,7 +85,7 @@
                         <textarea class="form-control" name="Input_Descricao" id="input_descricao" cols="30"
                             rows="10" placeholder="Insira uma descrição do produto..."></textarea>
                         <div class="invalid-feedback">
-                            Digite seu nome corretamente.
+                            Digite uma descrição corretamente.
                         </div>
                     </div>
                 </div>
@@ -94,12 +94,22 @@
                         <label for="input_Nome">Preco</label>
                         <input type="text" data-prefix="R$ " name="preco" id="preco" class="form-control" placeholder="R$ 0.00">
                         <div class="invalid-feedback">
-                            Digite seu nome corretamente.
+                            Digite o Preço corretamente.
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="input_Estoque">Estoque</label>
+                        <input type="number" class="form-control" id="input_estoque" name="Input_Estoque"
+                            placeholder="Insira o Estoque">
+                        <div class="invalid-feedback">
+                            Digite seu Estoque corretamente.
                         </div>
                     </div>
                 </div>
                 <div class="button">
+                    <button id="Editar" class="btn btn-primary" type="button">Editar</button>
                     <button id="Cadastrar" class="btn btn-primary" type="submit">Cadastrar</button>
+                    <button id="Pesquisar" class="btn btn-primary" type="button">Pesquisar</button>
                 </div>
             </form>
         </div>
@@ -136,6 +146,7 @@
             jQuery('#preco').maskMoney();
         });
     </script>
+    <script src="Resources/JS/cadastroProd.js"></script>
 </body>
 
 </html>

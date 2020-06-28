@@ -39,7 +39,7 @@ double tot = 0;
 		<!--Desktop-->
 		<div class="collapse navbar-collapse justify-content-around"
 			id="navbarSupportedContent">
-			<a class="navbar-brand" href="./principal" id="navImg"> <img
+			<a class="navbar-brand" href="./principal.jsp" id="navImg"> <img
 				src="img/Logo.png" alt="Logo Coronga Farma">
 			</a>
 			<form class="form-inline my-2 my-lg-0" id="search" action="./principal.jsp" method="get">
