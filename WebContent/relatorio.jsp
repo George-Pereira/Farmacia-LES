@@ -77,7 +77,14 @@
                     </tr>
                 <%
                 	receita += (pv.getQtd() * pv.getPrecoUnit());
-                }%>           
+                }%>  
+                	<tr class="tot">
+                        <th scope="row">Total</th>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(receita)%></td>
+                    </tr>          
                 </tbody>
             </table>
         </div>
