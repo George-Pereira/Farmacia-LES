@@ -185,7 +185,7 @@ begin
 		select p.id,p.nomeProd,c.qntd,p.preco,c.val_total,c.dtcompra  from produtos p INNER JOIN compra c on p.id = c.prod_id
 		return
 end
-
+SELECT * FROM f_relatorio()
 select * from f_relatorio()
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 --inserir uma cliente e endereço juntas 
@@ -245,4 +245,8 @@ DECLARE	@validaEmail varchar(100),
 	return
 end
 
+INSERT INTO adm (id_adm, nome, email,senha) VALUES
+(1, 'George', 'George@admin.com', '87654321')
+
+SELECT * FROM adm
 SELECT * FROM compra
