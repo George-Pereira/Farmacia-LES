@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.fatec.farmacia.model.Administrador;
 import com.fatec.farmacia.model.Carrinho;
 import com.fatec.farmacia.model.Cliente;
+import com.fatec.farmacia.persistence.DaoAdmin;
 import com.fatec.farmacia.persistence.DaoCliente;
+import com.fatec.farmacia.persistence.IntDaoAdmin;
 import com.fatec.farmacia.persistence.IntDaoCliente;
 
 @WebServlet("/logon")
@@ -28,22 +32,35 @@ public class ServletLogin extends HttpServlet
 		Cliente cli;
 		String user = req.getParameter("InputEmail");
 		String pass = req.getParameter("InputSenha");
-		IntDaoCliente dao = new DaoCliente();
 		try 
 		{
-			cli = dao.autenticaAcesso(user, pass);
-			if(cli != null)
+			if(user.contains("@admin.com")) 
 			{
-				HttpSession session = req.getSession();
-				session.setAttribute("CLIENTE", cli);
-				Carrinho cartCli = new Carrinho();
-				cartCli.setIdCliente(cli.getId());
-				session.setAttribute("CARRINHO", cartCli);
-				resp.sendRedirect("./principal.jsp");
+				IntDaoAdmin dao = new DaoAdmin();
+				Administrador adm = dao.autenticaAdmin(user, pass);
+				if(adm != null) 
+				{
+					req.getSession().setAttribute("ADMIN", adm);
+					resp.sendRedirect("./relatorio.jsp");
+				}
 			}
-			else
+			else 
 			{
-				resp.sendRedirect("./login.jsp");
+				IntDaoCliente dao = new DaoCliente();
+				cli = dao.autenticaAcesso(user, pass);
+				if(cli != null)
+				{
+					HttpSession session = req.getSession();
+					session.setAttribute("CLIENTE", cli);
+					Carrinho cartCli = new Carrinho();
+					cartCli.setIdCliente(cli.getId());
+					session.setAttribute("CARRINHO", cartCli);
+					resp.sendRedirect("./principal.jsp");
+				}
+				else
+				{
+					resp.sendRedirect("./login.jsp");
+				}
 			}
 		}
 		catch (SQLException | IOException e) 

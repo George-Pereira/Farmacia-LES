@@ -1,5 +1,7 @@
 package com.fatec.farmacia.model;
 
+import java.sql.Date;
+
 public class Produtos_Venda 
 {
 	private long id;
@@ -8,6 +10,7 @@ public class Produtos_Venda
 	private double receitaProd;
 	private double receita;
 	private int qtd;
+	private Date dtCompra;
 	public long getId() 
 	{
 		return id;
@@ -54,6 +57,12 @@ public class Produtos_Venda
 	}
 	public void setQtd(int qtd) {
 		this.qtd = qtd;
+	}
+	public Date getDtCompra() {
+		return dtCompra;
+	}
+	public void setDtCompra(Date dtCompra) {
+		this.dtCompra = dtCompra;
 	}
 	
 	

@@ -1,7 +1,24 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="com.fatec.farmacia.model.Produtos_Venda"%>
+<%@page import="com.fatec.farmacia.persistence.DaoCompra"%>
+<%@page import="com.fatec.farmacia.persistence.IntDaoCompra"%>
+<%@page import="com.fatec.farmacia.model.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
-
+	<%
+		Administrador adm = (Administrador)session.getAttribute("ADMIN");
+		if(adm == null)
+		{
+			response.sendRedirect("./login");
+		}
+		IntDaoCompra dao = new DaoCompra();
+		List<Produtos_Venda> lista = new LinkedList<Produtos_Venda>();
+		lista = dao.construirRelatorio();
+	%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +47,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img data-feather="user" alt="Login" stroke="white">
-                        <span style="color: white;">Gerente</span>
+                        <span style="color: white;">Gerente <%=adm.getNome()%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="">Gerenciar Produtos</a>
@@ -55,27 +72,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                <%
+                double receita = 0;
+                for(Produtos_Venda pv : lista)
+                {%>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Creme Dental Colgate Total 12</td>
-                        <td>100</td>
-                        <td>8,78</td>
-                        <td>878,00</td>
+                        <th scope="row"><%=pv.getId()%></th>
+                        <td><%=pv.getNome()%></td>
+                        <td><%=pv.getQtd()%></td>
+                        <td><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pv.getPrecoUnit())%></td>
+                        <td><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pv.getReceita())%></td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Curativos Transparentes Band-Aid</td>
-                        <td>250</td>
-                        <td>6,79</td>
-                        <td>1.697,50</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Centrum Mulher</td>
-                        <td>15</td>
-                        <td>233,40</td>
-                        <td>3.501,00</td>
-                    </tr>           
+                <%
+                	receita += (pv.getQtd() * pv.getPrecoUnit());
+                }%>           
                 </tbody>
             </table>
             <div class="button">

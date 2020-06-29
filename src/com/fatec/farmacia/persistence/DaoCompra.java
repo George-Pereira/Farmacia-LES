@@ -27,17 +27,25 @@ public class DaoCompra implements IntDaoCompra
 	public List<Produtos_Venda> construirRelatorio() throws SQLException 
 	{
 		List<Produtos_Venda> prodVendidos = new LinkedList<Produtos_Venda>();
-		String sql = "SELECT * f_relatorio()";
+		String sql = "SELECT * FROM f_relatorio()";
 		PreparedStatement stmt = connect.prepareStatement(sql);
 		ResultSet result = stmt.executeQuery();
-		while(result.next()) 
+		while(result.next())
 		{
 			Produtos_Venda pv = new Produtos_Venda();
 			pv.setId(result.getLong("cod_Prod"));
 			pv.setNome(result.getString("nome_Prod"));
-			pv.setReceitaProd(result.getDouble("valor_Prod"));
+			PreparedStatement state = connect.prepareStatement("SELECT preco FROM produtos WHERE id = ?");
+			state.setLong(1, pv.getId());
+			ResultSet preco = state.executeQuery();
+			if(preco.next()) 
+			{
+				pv.setPrecoUnit(preco.getDouble("preco"));
+			}
 			pv.setQtd(result.getInt("qntdVend"));
-			pv.setReceita((pv.getReceita() + result.getDouble("val_total")));
+			pv.setReceita(result.getDouble("valor_prod") * pv.getQtd());
+			pv.setDtCompra(result.getDate("dtcompra"));
+			prodVendidos.add(pv);
 		}
 		return prodVendidos;
 	}
