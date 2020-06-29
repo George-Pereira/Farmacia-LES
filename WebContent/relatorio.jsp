@@ -35,13 +35,6 @@
             <a class="navbar-brand" href="" id="navImg">
                 <img src="img/Logo.png" alt="Logo Coronga Farma">
             </a>
-            <form class="form-inline my-2 my-lg-0" id="search">
-                <input class="form-control mr-sm-2" type="search" placeholder="O que está procurando..."
-                    aria-label="Search">
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">
-                    <img src="img/search.svg" alt="Pesquisar">
-                </button>
-            </form>
             <ul class="nav navbar-nav navbar-right" id="navbar_itens">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -50,7 +43,6 @@
                         <span style="color: white;">Gerente <%=adm.getNome()%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Gerenciar Produtos</a>
                         <a class="dropdown-item" href="">Cadastrar Produtos</a>
                         <a class="dropdown-item" href="">Logout</a>
                     </div>
@@ -88,9 +80,6 @@
                 }%>           
                 </tbody>
             </table>
-            <div class="button">
-                <button id="Voltar" class="btn btn-primary" type="submit">Voltar ao Inicio</button>
-            </div>
         </div>
     </main>
 
@@ -110,5 +99,4 @@
         feather.replace();
     </script>
 </body>
-
 </html>
