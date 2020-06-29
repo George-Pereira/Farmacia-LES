@@ -78,7 +78,7 @@
                 <%
                 	receita += (pv.getQtd() * pv.getPrecoUnit());
                 }%>  
-                	<tr class="tot">
+                	<tr class="tot" style="background-color: #007bff;">
                         <th scope="row">Total</th>
                         <td>-</td>
                         <td>-</td>
