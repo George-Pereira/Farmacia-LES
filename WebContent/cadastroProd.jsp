@@ -27,7 +27,7 @@
                         <span style="color: white;">Gerente</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Cadastrar Produtos</a>
+                        <a class="dropdown-item" href="./cadastroProd.jsp">Cadastrar Produtos</a>
                         <a class="dropdown-item" href="">Logout</a>
                     </div>
                 </li>
