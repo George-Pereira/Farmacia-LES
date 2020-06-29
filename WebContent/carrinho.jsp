@@ -80,7 +80,7 @@ double tot = 0;
 						<img src="img/<%=p.getTipoRemedio()%>.png" class="card-img-top" id="img" alt="<%=p.getTipoRemedio()%>">
 						<div class="card-body">
 							<p class="card-text" id="valor"><%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(p.getValUnit())%></p>
-							<button class="lata" onclick="Deleta('<%=p.getIdRemedio()%>')">
+							<button class="lata" onclick="removerItem('<%=p.getIdRemedio()%>')">
 								<img src="img/LataLixo.svg" alt="Lata de Lixo">
 							</button>
 						</div>
@@ -126,5 +126,6 @@ double tot = 0;
 		feather.replace();
 	</script>
 	<script src="Resources/JS/compra.js"></script>
+	<script src="Resources/JS/remover.js"></script>
 </body>
 </html>

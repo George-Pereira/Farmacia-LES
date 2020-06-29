@@ -1,5 +1,15 @@
+<%@page import="com.fatec.farmacia.model.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	Administrador adm = new Administrador();
+    	adm = (Administrador)request.getSession().getAttribute("ADMIN");
+    	if(adm == null)
+    	{
+    		response.sendRedirect("./login");
+    	}
+    	
+    %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
