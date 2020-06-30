@@ -38,10 +38,13 @@ public class ServletLogin extends HttpServlet
 			{
 				IntDaoAdmin dao = new DaoAdmin();
 				Administrador adm = dao.autenticaAdmin(user, pass);
-				if(adm.getEmail().equals(user) && adm.getSenha().equals(pass)) 
+				if(adm.getEmail().equals(user)) 
 				{
-					req.getSession().setAttribute("ADMIN", adm);
-					resp.sendRedirect("./relatorio.jsp");
+					if(adm.getSenha().equals(pass)) 
+					{
+						req.getSession().setAttribute("ADMIN", adm);
+						resp.sendRedirect("./relatorio.jsp");
+					}
 				}
 				else 
 				{
