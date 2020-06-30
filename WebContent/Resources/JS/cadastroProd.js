@@ -48,3 +48,10 @@ form.addEventListener('submit', function (e) {
         inputEstoque.classList.add('is-valid');
     }
 });
+
+var btnPesquisa = document.getElementById('Pesquisar');
+btnPesquisa.addEventListener('click', desabilita, false);
+function desabilita(e)
+{
+	e.preventDefault();
+}

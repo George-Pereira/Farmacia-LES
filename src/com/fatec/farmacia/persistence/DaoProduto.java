@@ -72,4 +72,75 @@ public class DaoProduto implements IntDaoProduto
 		}
 		return lista;
 	}
+	@Override
+	public Produto getProdutoNome(String nome) throws SQLException 
+	{
+		String query = "SELECT id, nomeProd, idtipo, quantidade, descricao, preco FROM produtos WHERE nomeProd = ?";
+		PreparedStatement stmt = connect.prepareStatement(query);
+		stmt.setString(1, nome);
+		Produto prod = new Produto();
+		ResultSet result = stmt.executeQuery();
+		if(result.next()) 
+		{
+			prod.setIdRemedio(result.getLong("id"));
+			prod.setNomeRemedio(result.getString("nomeProd"));
+			PreparedStatement state = connect.prepareStatement("SELECT categoria FROM tipo WHERE id = ?");
+			state.setLong(1, result.getLong("idtipo"));
+			ResultSet rs = state.executeQuery();
+			if(rs.next()) 
+			{
+				prod.setTipoRemedio(rs.getString("categoria"));
+			}
+			rs.close();
+			state.close();
+			prod.setQuantEst(result.getInt("quantidade"));
+			prod.setDetalhes(result.getString("descricao"));
+			prod.setValUnit(result.getDouble("preco"));
+		}
+		return prod;
+	}
+	@Override
+	public void insereProduto(Produto prod) throws SQLException 
+	{
+		String sql = "INSERT INTO produtos (nomeProd, idtipo, quantidade, descricao, preco) VALUES(?, ?, ?, ?, ?)";
+		PreparedStatement state = connect.prepareStatement(sql);
+		state.setString(1, prod.getNomeRemedio());
+		PreparedStatement st = connect.prepareStatement("SELECT id FROM tipo WHERE categoria = ?");
+		st.setString(1, prod.getTipoRemedio());
+		ResultSet rs = st.executeQuery();
+		if(rs.next())
+		{
+			long idCat = rs.getLong("id");
+			state.setLong(2, idCat);
+		}
+		rs.close();
+		st.close();
+		state.setInt(3, prod.getQuantEst());
+		state.setString(4, prod.getDetalhes());
+		state.setDouble(5, prod.getValUnit());
+		state.execute();
+		state.close();
+	}
+	@Override
+	public void atualizaProd(Produto prod) throws SQLException 
+	{
+		String sql = "UPDATE produtos SET nomeProd = ?, idtipo = ?, quantidade = ?, descricao = ?, preco = ? WHERE id = ?";
+		PreparedStatement stmt = connect.prepareStatement(sql);
+		stmt.setString(1, prod.getNomeRemedio());
+		PreparedStatement st = connect.prepareStatement("SELECT id FROM tipo WHERE categoria = ?");
+		st.setString(1, prod.getTipoRemedio());
+		ResultSet rs = st.executeQuery();
+		if(rs.next())
+		{
+			stmt.setLong(2, rs.getLong("id"));
+		}
+		st.close();
+		rs.close();
+		stmt.setInt(3, prod.getQuantEst());
+		stmt.setString(4, prod.getDetalhes());
+		stmt.setDouble(5, prod.getValUnit());
+		stmt.setLong(6, prod.getIdRemedio());
+		stmt.execute();
+		stmt.close();
+	}
 }

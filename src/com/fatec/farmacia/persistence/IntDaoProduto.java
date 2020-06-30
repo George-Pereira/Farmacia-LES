@@ -10,4 +10,7 @@ public interface IntDaoProduto
 	public List<Produto> getTodosProd() throws SQLException;
 	public Produto getProduto(long idProd) throws SQLException;
 	public List<Produto> getProdutosporChave(String chaves) throws SQLException;
+	public Produto getProdutoNome(String nome) throws SQLException;
+	public void insereProduto(Produto prod) throws SQLException;
+	public void atualizaProd(Produto prod) throws SQLException;
 }

@@ -1,3 +1,4 @@
+<%@page import="com.fatec.farmacia.model.Produto"%>
 <%@page import="com.fatec.farmacia.model.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,7 +9,8 @@
     	{
     		response.sendRedirect("./login");
     	}
-    	
+    	Produto pesq = new Produto();
+    	pesq = (Produto) request.getSession().getAttribute("PESQUISA");
     %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="nav_principal">
         <!--Desktop-->
         <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
-            <a class="navbar-brand" href="" id="navImg">
+            <a class="navbar-brand" href="./relatorio.jsp" id="navImg">
                 <img src="img/Logo.png" alt="Logo Coronga Farma">
             </a>
             <ul class="nav navbar-nav navbar-right" id="navbar_itens">
@@ -34,11 +36,11 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img data-feather="user" alt="Login" stroke="white">
-                        <span style="color: white;">Gerente</span>
+                        <span style="color: white;">Gerente <%=adm.getNome()%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="./cadastroProd.jsp">Cadastrar Produtos</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="./logout">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -47,14 +49,14 @@
     <main>
         <div class="container">
             <h1 id="title">Cadastrar Produto</h1>
-            <form id="form" action="" method="post">
+            <form id="form" action="./cadprod" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="input_Nome">Nome</label>
                         <input type="text" class="form-control" id="input_Nome" name="Input_Nome"
-                            placeholder="Insira seu Nome">
+                            placeholder="Insira o Nome do Produto"<%if(pesq != null){%> value="<%=pesq.getNomeRemedio()%>" <%}%>>
                         <div class="invalid-feedback">
-                            Digite seu nome corretamente.
+                            Digite o nome do produto.
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -63,9 +65,7 @@
                             <option selected>--</option>
                             <option>Absorvente</option>
                             <option>Colírio</option>
-                            <option>Comprimido Genérico</option>
-                            <option>Comprimido Tarja Amarela</option>
-                            <option>Comprimido Tarja Preta</option>
+                            <option>Comprimido</option>
                             <option>Creme Dental</option>
                             <option>Creme Facial</option>
                             <option>Curativo</option>
@@ -77,15 +77,15 @@
                             <option>Xarope</option>
                         </select>
                         <div class="invalid-feedback">
-                            Selecione um Sexo.
+                            Selecione uma Categoria
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="input_descricao">descrição</label>
+                        <label for="input_descricao">Descrição</label>
                         <textarea class="form-control" name="Input_Descricao" id="input_descricao" cols="30"
-                            rows="10" placeholder="Insira uma descrição do produto..."></textarea>
+                            rows="10" placeholder="Insira uma descrição do produto..."><%if(pesq != null){%><%=pesq.getDetalhes()%><%}%></textarea>
                         <div class="invalid-feedback">
                             Digite uma descrição corretamente.
                         </div>
@@ -94,7 +94,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="input_Nome">Preco</label>
-                        <input type="text" data-prefix="R$ " name="preco" id="preco" class="form-control" placeholder="R$ 0.00">
+                        <input type="text" data-prefix="R$ " name="preco" id="preco" class="form-control" placeholder="R$ 0,00" <%if(pesq != null){%> value="<%=pesq.getValUnit()%>" <%}%>>
                         <div class="invalid-feedback">
                             Digite o Preço corretamente.
                         </div>
@@ -102,16 +102,16 @@
                     <div class="form-group col-md-4">
                         <label for="input_Estoque">Estoque</label>
                         <input type="number" class="form-control" id="input_estoque" name="Input_Estoque"
-                            placeholder="Insira o Estoque">
+                            placeholder="Insira o Estoque" <%if(pesq != null){%> value="<%=pesq.getQuantEst()%>"<%}%>>
                         <div class="invalid-feedback">
-                            Digite seu Estoque corretamente.
+                            Digite um valor válido.
                         </div>
                     </div>
                 </div>
                 <div class="button">
-                    <button id="Editar" class="btn btn-primary" type="button">Editar</button>
-                    <button id="Cadastrar" class="btn btn-primary" type="submit">Cadastrar</button>
-                    <button id="Pesquisar" class="btn btn-primary" type="button">Pesquisar</button>
+                    <button id="Editar" class="btn btn-primary" type="submit" value="editar" name="cmd">Editar</button>
+                    <button id="Cadastrar" class="btn btn-primary" type="submit" value="cadastrar" name="cmd">Cadastrar</button>
+                    <button id="Pesquisar" class="btn btn-primary" type="submit" value="pesquisar" name="cmd">Pesquisar</button>
                 </div>
             </form>
         </div>
@@ -126,7 +126,6 @@
             </div>
         </div>
     </footer>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -148,7 +147,6 @@
             jQuery('#preco').maskMoney();
         });
     </script>
-    <script src="Resources/JS/cadastroProd.js"></script>
 </body>
 
 </html>

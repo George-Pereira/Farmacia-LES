@@ -29,7 +29,7 @@ public class ServletLogout extends HttpServlet
             session.invalidate();
             resp.sendRedirect("login.jsp");
         }
-        if(session.getAttribute("ADMIN") != null) 
+        else if(session.getAttribute("ADMIN") != null) 
         {
         	session.removeAttribute("ADMIN");
         	session.invalidate();
