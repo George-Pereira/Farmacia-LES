@@ -19,59 +19,59 @@ import com.fatec.farmacia.persistence.IntDaoAdmin;
 import com.fatec.farmacia.persistence.IntDaoCliente;
 
 @WebServlet("/logon")
-public class ServletLogin extends HttpServlet 
-{
+public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-	{
-		logar(req,resp);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logar(req, resp);
 	}
-	private void logar(HttpServletRequest req, HttpServletResponse resp) 
-	{
+
+	private void logar(HttpServletRequest req, HttpServletResponse resp) {
 		Cliente cli;
 		String user = req.getParameter("InputEmail");
 		String pass = req.getParameter("InputSenha");
-		try 
-		{
-			if(user.contains("@admin.com")) 
-			{
+		try {
+			if (user.contains("@admin.com")) {
 				IntDaoAdmin dao = new DaoAdmin();
 				Administrador adm = dao.autenticaAdmin(user, pass);
-				if(adm.getEmail().equals(user)) 
-				{
-					if(adm.getSenha().equals(pass)) 
-					{
-						req.getSession().setAttribute("ADMIN", adm);
-						resp.sendRedirect("./relatorio.jsp");
+				if (adm != null) {
+					if (adm.getEmail().equalsIgnoreCase(user)) {
+						if (adm.getSenha().equals(pass)) {
+							req.getSession().setAttribute("ADMIN", adm);
+							resp.sendRedirect("./relatorio.jsp");
+						} else {
+							resp.sendRedirect("./login.jsp");
+						}
+					} else {
+						resp.sendRedirect("./login.jsp");
 					}
-				}
-				else 
-				{
+				}else {
 					resp.sendRedirect("./login.jsp");
 				}
-			}
-			else 
-			{
+			} else {
 				IntDaoCliente dao = new DaoCliente();
 				cli = dao.autenticaAcesso(user, pass);
-				if(cli != null)
-				{
-					HttpSession session = req.getSession();
-					session.setAttribute("CLIENTE", cli);
-					Carrinho cartCli = new Carrinho();
-					cartCli.setIdCliente(cli.getId());
-					session.setAttribute("CARRINHO", cartCli);
-					resp.sendRedirect("./principal.jsp");
-				}
-				else
-				{
+				if (cli != null) {
+					if (cli.getEmail().equalsIgnoreCase(user)) {
+						if (cli.getSenha().equals(pass)) {
+							HttpSession session = req.getSession();
+							session.setAttribute("CLIENTE", cli);
+							Carrinho cartCli = new Carrinho();
+							cartCli.setIdCliente(cli.getId());
+							session.setAttribute("CARRINHO", cartCli);
+							resp.sendRedirect("./principal.jsp");
+						} else {
+							resp.sendRedirect("./login.jsp");
+						}
+					} else {
+						resp.sendRedirect("./login.jsp");
+					}
+				} else {
 					resp.sendRedirect("./login.jsp");
 				}
 			}
-		}
-		catch (SQLException | IOException e) 
-		{
+		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
 	}

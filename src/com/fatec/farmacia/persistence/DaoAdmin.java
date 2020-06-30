@@ -19,7 +19,7 @@ public class DaoAdmin implements IntDaoAdmin
 	public Administrador autenticaAdmin(String user, String senha) throws SQLException 
 	{
 		Administrador adm = new Administrador();
-		String sql = "SELECT * FROM adm WHERE email = ? AND senha = ?";
+		String sql = "SELECT email, senha, nome FROM adm WHERE email = ? AND senha = ?";
 		PreparedStatement stmt = connect.prepareStatement(sql);
 		stmt.setString(1, user);
 		stmt.setString(2, senha);
