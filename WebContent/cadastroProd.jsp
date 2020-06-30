@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="com.fatec.farmacia.model.Produto"%>
 <%@page import="com.fatec.farmacia.model.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -62,9 +64,9 @@
                     <div class="form-group col-md-6">
                         <label for="input_categoria">Categoria</label>
                         <select id="input_categoria" name="Input_Categoria" class="form-control">
-                            <option selected>--</option>
+                            <option selected><%if(pesq != null){%><%=pesq.getTipoRemedio()%> <%}%></option>
                             <option>Absorvente</option>
-                            <option>Colírio</option>
+                            <option>Colirio</option>
                             <option>Comprimido</option>
                             <option>Creme Dental</option>
                             <option>Creme Facial</option>
@@ -94,7 +96,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="input_Nome">Preco</label>
-                        <input type="text" data-prefix="R$ " name="preco" id="preco" class="form-control" placeholder="R$ 0,00" <%if(pesq != null){%> value="<%=pesq.getValUnit()%>" <%}%>>
+                        <input type="text" data-prefix="R$ " name="preco" id="preco" class="form-control" placeholder="R$ 0,00" <%if(pesq != null){%> value="<%=NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pesq.getValUnit())%>" <%}%>>
                         <div class="invalid-feedback">
                             Digite o Preço corretamente.
                         </div>

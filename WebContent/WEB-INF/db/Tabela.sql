@@ -72,15 +72,23 @@ senha varchar(20)not null
 
 
 insert into tipo values
+('Absorvente'),
+('Colirio'),
 ('Comprimido'),
+('Creme Dental'),
+('Creme Facial'),
 ('Curativo'),
+('Enxaguante Bucal'),
 ('Pastilha'),
-('Protetor Solar')
+('Protetor Solar'),
+('Repelente'),
+('Vitamina'),
+('Xarope')
 insert into produtos values
-('Buscopan',1,'69.99','Cólicas intestinais',50),
-('Band-Aid',2,'30.00','Curativos para todo tipo de lesão/corte',20),
-('Pastilha Strepsils',3,'40.00','Pastilhas para irritações e dores de garganta',30),
-('Protetor Solar 30FPS',4,'80.00','Protetor Solar Do Rafael',80)
+('Buscopan',3,'69.99','Colicas intestinais',50),
+('Band-Aid',6,'30.00','Curativos para todo tipo de lesao/corte',20),
+('Pastilha Strepsils',8,'40.00','Pastilhas para irritacoes e dores de garganta',30),
+('Protetor Solar 30FPS',9,'80.00','Protetor Solar Do Rafael',80)
 
 
 select * from produtos
@@ -246,7 +254,7 @@ DECLARE	@validaEmail varchar(100),
 end
 
 INSERT INTO adm (id_adm, nome, email,senha) VALUES
-(1, 'George', 'George@admin.com', '87654321')
+(1, 'Jonathas', 'Jonathas@admin.com', '87654321')
 
 SELECT * FROM adm
 SELECT * FROM compra
